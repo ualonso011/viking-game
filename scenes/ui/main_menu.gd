@@ -1,7 +1,5 @@
 extends CanvasLayer
-## Main menu screen.
-
-signal start_game()
+## Main menu screen. Calls Main._on_start_game() directly on button press.
 
 ## Font size as fraction of viewport height (Title)
 const TITLE_SIZE_RATIO: float = 0.045
@@ -12,22 +10,10 @@ const BUTTON_SIZE_RATIO: float = 0.022
 
 
 func _ready() -> void:
-	# Style the button with a visible background
 	_style_button($VBoxContainer/StartButton)
 
-	# Connect the start button — direct, no signal chain detour
-	var btn = $VBoxContainer/StartButton
-	if btn and btn.has_signal(&"pressed"):
-		btn.pressed.connect(_on_start_pressed)
-	else:
-		push_error("MainMenu: StartButton not found or has no 'pressed' signal")
-
-	# Connect start_game → main directly (avoids typed-reference issues)
-	var main = get_node("/root/Main")
-	if main and main.has_method("_on_start_game"):
-		start_game.connect(main._on_start_game)
-	else:
-		push_error("MainMenu: could not find Main._on_start_game")
+	# Use button_up (unambiguous signal — no property conflict)
+	$VBoxContainer/StartButton.button_up.connect(_on_start_pressed)
 
 	# Scale fonts to viewport height
 	var vp_height: float = get_viewport().get_visible_rect().size.y
@@ -80,4 +66,9 @@ func _style_button(btn: Button) -> void:
 
 
 func _on_start_pressed() -> void:
-	start_game.emit()
+	# Direct call — no signals, no typed-variable issues
+	var main = get_parent()
+	if main and main.has_method(&"_on_start_game"):
+		main._on_start_game()
+	else:
+		push_error("MainMenu: cannot find Main._on_start_game()")

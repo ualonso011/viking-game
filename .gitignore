@@ -1,0 +1,26 @@
+# Godot 4
+.godot/
+*.godot.uid
+import/
+.android/
+.mono/
+mono_crash.*.json
+
+# Export
+build/
+export/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Android
+*.keystore
+local.properties

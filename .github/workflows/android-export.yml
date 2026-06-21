@@ -1,0 +1,59 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:  # Manual trigger from GitHub UI
+
+env:
+  GODOT_VERSION: "4.3"
+  EXPORT_NAME: "LasCenizasDelOso"
+
+jobs:
+  export-android:
+    name: Export Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: ${{ env.GODOT_VERSION }}
+          use-dotnet: false
+          include-templates: true
+
+      - name: Generate placeholder sprites
+        run: |
+          # Generate colored placeholder sprites using Godot headless
+          # This runs the tool script if Godot supports --script in headless
+          godot --headless --script assets/sprites/generate_placeholders.gd --quit 2>/dev/null || true
+          echo "Placeholder generation attempted"
+
+      - name: Create Android debug keystore
+        run: |
+          keytool -genkey -v -keystore android.keystore \
+            -alias android -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass android -keypass android \
+            -dname "CN=Developer, OU=Dev, O=VikingGame, L=None, S=None, C=US"
+
+      - name: Export Android APK
+        run: |
+          mkdir -p build
+          godot --headless --export-debug "Android" build/${{ env.EXPORT_NAME }}.apk 2>&1
+
+      - name: Export Android AAB (Release)
+        run: |
+          godot --headless --export-release "Android" build/${{ env.EXPORT_NAME }}.aab 2>&1 || true
+          echo "AAB export attempted (may fail without release keystore)"
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.EXPORT_NAME }}-Android
+          path: build/
+          retention-days: 30

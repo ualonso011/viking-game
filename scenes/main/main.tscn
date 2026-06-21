@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1k7f7pu4dbgs"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_causg"]
+[ext_resource type="PackedScene" uid="uid://dlnv6tfw4bkac" path="res://scenes/ui/main_menu.tscn" id="2_yc7q7"]
+[ext_resource type="PackedScene" uid="uid://cjt8rskyow3cc" path="res://scenes/ui/hud.tscn" id="3_shq46"]
+[ext_resource type="PackedScene" uid="uid://bvbmrme1u1oyj" path="res://scenes/ui/touch_controls.tscn" id="4_c2r54"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "fade_out"
+length = 0.5
+loop_mode = 0
+step = 0.0
+tracks = [{
+"type": "value",
+"path": "../FadeRect:modulate",
+"interp": 1,
+"loop_wrap": true,
+"keys": {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+}]
+
+[sub_resource type="Animation" id="2"]
+resource_name = "fade_in"
+length = 0.5
+loop_mode = 0
+step = 0.0
+tracks = [{
+"type": "value",
+"path": "../FadeRect:modulate",
+"interp": 1,
+"loop_wrap": true,
+"keys": {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+}]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_causg")
+
+[node name="FadeRect" type="ColorRect" parent="."]
+color = Color(0, 0, 0, 0)
+offset_left = 0
+offset_top = 0
+offset_right = 1920
+offset_bottom = 1080
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = ""
+anims/fade_out = SubResource("1")
+anims/fade_in = SubResource("2")
+
+[node name="MainMenu" parent="." instance=ExtResource("2_yc7q7")]
+
+[node name="HUD" parent="." instance=ExtResource("3_shq46")]
+
+[node name="TouchControls" parent="." instance=ExtResource("4_c2r54")]

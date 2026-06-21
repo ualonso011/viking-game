@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/virtual_joystick.gd" id="1_8sjd2"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(160, 160)
+
+[node name="VirtualJoystick" type="Control"]
+offset_left = 40.0
+offset_top = 720.0
+offset_right = 200.0
+offset_bottom = 880.0
+script = ExtResource("1_8sjd2")
+
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(80, 80)
+scale = Vector2(3, 3)
+modulate = Color(1, 1, 1, 0.25)
+texture = null
+
+[node name="Knob" type="Sprite2D" parent="."]
+position = Vector2(80, 80)
+scale = Vector2(2, 2)
+modulate = Color(1, 1, 1, 0.5)
+texture = null

@@ -1,0 +1,34 @@
+# openspec/config.yaml
+schema: spec-driven
+
+context: |
+  Tech stack: Godot 4 (GDScript)
+  Architecture: Game scenes + scripts (Godot node/scene pattern)
+  Testing: Not available (no GDScript test runner configured)
+  Style: GDScript, Godot 4 conventions
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+    - Define scope boundaries for Godot 4 scenes and scripts
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include node tree diagrams for scene architecture
+    - Document signal connections between scenes
+    - Document architecture decisions with rationale
+  tasks:
+    - Group by phase, use hierarchical numbering
+    - Keep tasks completable in one session
+  apply:
+    - Follow existing GDScript code patterns
+    - Follow Godot 4 best practices (type hints, @onready, signals)
+    tdd: false
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: ""
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas

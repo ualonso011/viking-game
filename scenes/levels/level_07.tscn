@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvtd2lfioxkhl"]
+
+[ext_resource type="Script" path="res://scenes/levels/level_07.gd" id="1_jhx7h"]
+[ext_resource type="PackedScene" uid="uid://dhgjt3jj1vm73" path="res://scenes/player/player.tscn" id="2_wc2hk"]
+[ext_resource type="PackedScene" uid="uid://bv7dckwkghm5j" path="res://scenes/enemies/boss.tscn" id="3_k7x6y"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(2800, 32)
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(32, 128)
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(128, 64)
+
+[node name="Level07" type="Node2D"]
+script = ExtResource("1_jhx7h")
+
+[node name="BgColor" type="ColorRect" parent="."]
+color = Color(0.02, 0.02, 0.03, 1)
+offset_left = 0
+offset_top = 0
+offset_right = 2800
+offset_bottom = 1080
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(1400, 760)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("1")
+
+[node name="GroundVisual" type="ColorRect" parent="."]
+color = Color(0.05, 0.05, 0.06, 1)
+offset_left = 0
+offset_top = 744
+offset_right = 2800
+offset_bottom = 776
+
+[node name="Ashes1" type="ColorRect" parent="."]
+color = Color(0.08, 0.06, 0.04, 1)
+offset_left = 0
+offset_top = 700
+offset_right = 2800
+offset_bottom = 744
+
+[node name="Ashes2" type="ColorRect" parent="."]
+color = Color(0.06, 0.04, 0.02, 1)
+offset_left = 0
+offset_top = 500
+offset_right = 2800
+offset_bottom = 520
+
+[node name="ArenaWallL" type="StaticBody2D" parent="."]
+position = Vector2(16, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaWallL"]
+shape = SubResource("2")
+
+[node name="ArenaWallR" type="StaticBody2D" parent="."]
+position = Vector2(2784, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaWallR"]
+shape = SubResource("2")
+
+[node name="Player" parent="." instance=ExtResource("2_wc2hk")]
+position = Vector2(100, 700)
+
+[node name="BossFinal" parent="." instance=ExtResource("3_k7x6y")]
+position = Vector2(2500, 700)
+
+[node name="StoryTrigger" type="Area2D" parent="."]
+position = Vector2(1000, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTrigger"]
+shape = SubResource("4")
+
+[node name="Checkpoint" type="Area2D" parent="."]
+position = Vector2(400, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+shape = SubResource("4")
+
+[node name="EndTrigger" type="Area2D" parent="."]
+position = Vector2(2700, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndTrigger"]
+shape = SubResource("4")

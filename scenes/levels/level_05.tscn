@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4r6abwbfm6ng"]
+
+[ext_resource type="Script" path="res://scenes/levels/level_05.gd" id="1_jhx7h"]
+[ext_resource type="PackedScene" uid="uid://dhgjt3jj1vm73" path="res://scenes/player/player.tscn" id="2_wc2hk"]
+[ext_resource type="PackedScene" uid="uid://bv7dckwkghm5j" path="res://scenes/enemies/boss.tscn" id="3_k7x6y"]
+[ext_resource type="PackedScene" uid="uid://d4vsnrl0gnk0g" path="res://scenes/enemies/soldier.tscn" id="4_k7x6y"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(3200, 32)
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(32, 128)
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(128, 64)
+
+[node name="Level05" type="Node2D"]
+script = ExtResource("1_jhx7h")
+
+[node name="BgColor" type="ColorRect" parent="."]
+color = Color(0.06, 0.03, 0.02, 1)
+offset_left = 0
+offset_top = 0
+offset_right = 3200
+offset_bottom = 1080
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(1600, 760)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("1")
+
+[node name="GroundVisual" type="ColorRect" parent="."]
+color = Color(0.12, 0.06, 0.04, 1)
+offset_left = 0
+offset_top = 744
+offset_right = 3200
+offset_bottom = 776
+
+[node name="ArenaWallL" type="StaticBody2D" parent="."]
+position = Vector2(16, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaWallL"]
+shape = SubResource("2")
+
+[node name="ArenaWallR" type="StaticBody2D" parent="."]
+position = Vector2(3184, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArenaWallR"]
+shape = SubResource("2")
+
+[node name="Player" parent="." instance=ExtResource("2_wc2hk")]
+position = Vector2(100, 700)
+
+[node name="Soldier1" parent="." instance=ExtResource("4_k7x6y")]
+position = Vector2(1200, 700)
+
+[node name="Soldier2" parent="." instance=ExtResource("4_k7x6y")]
+position = Vector2(2000, 700)
+
+[node name="BossHalvard" parent="." instance=ExtResource("3_k7x6y")]
+position = Vector2(2800, 700)
+
+[node name="StoryTrigger" type="Area2D" parent="."]
+position = Vector2(2000, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTrigger"]
+shape = SubResource("4")
+
+[node name="Checkpoint" type="Area2D" parent="."]
+position = Vector2(800, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+shape = SubResource("4")
+
+[node name="EndTrigger" type="Area2D" parent="."]
+position = Vector2(3100, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndTrigger"]
+shape = SubResource("4")

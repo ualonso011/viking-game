@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <rect width="128" height="128" fill="#1a0f0a"/>
+  <text x="64" y="80" font-family="serif" font-size="60" fill="#8b4513" text-anchor="middle" font-weight="bold">O</text>
+  <line x1="20" y1="24" x2="108" y2="24" stroke="#6b3410" stroke-width="3"/>
+  <line x1="20" y1="104" x2="108" y2="104" stroke="#6b3410" stroke-width="3"/>
+</svg>

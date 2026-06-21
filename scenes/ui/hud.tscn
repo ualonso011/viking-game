@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_gfldj"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_gfldj")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 200.0
+offset_bottom = 40.0
+max_value = 3.0
+value = 3.0
+show_percentage = false
+tint_under = Color(0.1, 0.05, 0.0, 1.0)
+tint_progress = Color(0.8, 0.2, 0.15, 1.0)
+
+[node name="Label" type="Label" parent="HealthBar"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 4.0
+offset_right = 108.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "3/3"
+
+[node name="FuryIcon" type="TextureRect" parent="."]
+offset_left = 1720.0
+offset_top = 16.0
+offset_right = 1784.0
+offset_bottom = 80.0
+color = Color(1, 1, 1, 1)
+
+[node name="FuryCooldown" type="TextureProgressBar" parent="FuryIcon"]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 68.0
+offset_bottom = 68.0
+max_value = 30.0
+value = 0.0
+fill_mode = 2
+tint_progress = Color(0.2, 0.2, 0.8, 0.5)
+
+[node name="Label" type="Label" parent="FuryIcon"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 16.0
+offset_right = 1160.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Level 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheckpointBanner" type="Label" parent="."]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 540.0
+offset_right = 1160.0
+offset_bottom = 580.0
+theme_override_colors/font_color = Color(1, 1, 0.8, 1)
+theme_override_constants/outline_size = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Checkpoint Saved!"
+horizontal_alignment = 1
+vertical_alignment = 1

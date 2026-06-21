@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
 
 env:
+  GODOT_VERSION: "4.3"
   EXPORT_NAME: "LasCenizasDelOso"
 
 jobs:
@@ -15,38 +16,53 @@ jobs:
     name: Export Android APK
     runs-on: ubuntu-latest
 
-    container:
-      image: barichello/godot-ci:4.3-android
-
-    defaults:
-      run:
-        working-directory: /github/workspace
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate placeholders
+      - name: Download Godot 4.3
         run: |
-          godot --headless --script assets/sprites/generate_placeholders.gd --quit 2>/dev/null || true
-          echo "Placeholders done"
+          # Download Godot editor binary
+          wget -q https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          unzip -q Godot_v4.3-stable_linux.x86_64.zip
+          chmod +x Godot_v4.3-stable_linux.x86_64
+          
+          # Download export templates
+          wget -q https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
+          
+          # Install export templates
+          mkdir -p ~/.local/share/godot/export_templates/4.3.stable
+          unzip -q Godot_v4.3-stable_export_templates.tpz -d ~/.local/share/godot/export_templates/4.3.stable/
+          # The tpz contains a "templates/" subdir; move contents up
+          if [ -d ~/.local/share/godot/export_templates/4.3.stable/templates ]; then
+            mv ~/.local/share/godot/export_templates/4.3.stable/templates/* ~/.local/share/godot/export_templates/4.3.stable/
+            rmdir ~/.local/share/godot/export_templates/4.3.stable/templates
+          fi
+          
+          echo "Godot installed at: $(pwd)"
+          ls -la Godot_v4.3-stable_linux.x86_64
+          ls -la ~/.local/share/godot/export_templates/4.3.stable/
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
 
       - name: Create Android debug keystore
         run: |
-          keytool -genkey -v -keystore /tmp/android.keystore \
+          keytool -genkey -v -keystore ${{ github.workspace }}/android.keystore \
             -alias android -keyalg RSA -keysize 2048 -validity 10000 \
             -storepass android -keypass android \
-            -dname "CN=Dev, OU=Dev, O=VikingGame, L=City, S=State, C=US"
+            -dname "CN=Dev, OU=Dev, O=VikingGame, L=City, S=None, C=US"
 
       - name: Export Android APK
         run: |
           mkdir -p build
-          export GODOT_ANDROID_KEYSTORE_DEBUG_PATH=/tmp/android.keystore
-          export GODOT_ANDROID_KEYSTORE_DEBUG_USER=android
-          export GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD=android
-          godot --headless --export-debug "Android" build/${{ env.EXPORT_NAME }}.apk 2>&1
+          ./Godot_v4.3-stable_linux.x86_64 --headless \
+            --export-debug "Android" build/${{ env.EXPORT_NAME }}.apk 2>&1
 
-      - name: Upload APK Artifact
+      - name: Upload APK as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.EXPORT_NAME }}-Android

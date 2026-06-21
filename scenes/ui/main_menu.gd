@@ -3,9 +3,9 @@ extends CanvasLayer
 
 signal start_game()
 
-@onready var title_label: Label = $VBoxContainer/TitleLabel
-@onready var subtitle_label: Label = $VBoxContainer/SubtitleLabel
-@onready var start_btn: Button = $VBoxContainer/StartButton
+@onready var title_label: Label = $MenuContainer/VBoxContainer/TitleLabel
+@onready var subtitle_label: Label = $MenuContainer/VBoxContainer/SubtitleLabel
+@onready var start_btn: Button = $MenuContainer/VBoxContainer/StartButton
 
 
 func _ready() -> void:

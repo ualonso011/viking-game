@@ -16,8 +16,9 @@ func _ready() -> void:
 	$HUD.visible = false
 	$TouchControls.visible = false
 
-	if main_menu.has_signal("start_game"):
-		main_menu.start_game.connect(_on_start_game)
+	var err := main_menu.start_game.connect(_on_start_game)
+	if err != OK:
+		push_error("main: failed to connect start_game signal: ", error_string(err))
 
 	# Fade-in at start
 	if animation_player.has_animation("fade_in"):

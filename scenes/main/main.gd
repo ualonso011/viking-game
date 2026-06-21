@@ -5,7 +5,7 @@ enum GameStateEnum { MENU, PLAYING, CUTSCENE, PAUSED }
 
 var current_state: GameStateEnum = GameStateEnum.MENU
 
-@onready var main_menu: CanvasLayer = $MainMenu
+@onready var main_menu = $MainMenu
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var fade_rect: ColorRect = $FadeRect
 var current_level: Node = null

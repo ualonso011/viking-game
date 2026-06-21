@@ -22,6 +22,13 @@ func _ready() -> void:
 	else:
 		push_error("MainMenu: StartButton not found or has no 'pressed' signal")
 
+	# Connect start_game → main directly (avoids typed-reference issues)
+	var main = get_node("/root/Main")
+	if main and main.has_method("_on_start_game"):
+		start_game.connect(main._on_start_game)
+	else:
+		push_error("MainMenu: could not find Main._on_start_game")
+
 	# Scale fonts to viewport height
 	var vp_height: float = get_viewport().get_visible_rect().size.y
 	$VBoxContainer/TitleLabel.add_theme_font_size_override("font_size", max(16, int(vp_height * TITLE_SIZE_RATIO)))

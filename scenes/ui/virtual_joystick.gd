@@ -41,18 +41,17 @@ func _update_knob(pos: Vector2) -> void:
 	var len: float = relative.length()
 	if len < DEADZONE * MAX_RADIUS:
 		_output = Vector2.ZERO
-		emit_signal("moved", _output)
+		moved.emit(_output)
 		return
 
-	var clamped: Vector2 = relative.limit_length(0.0, MAX_RADIUS)
+	var clamped := relative.limit_length(MAX_RADIUS)
 	_output = clamped / MAX_RADIUS
 	_output.y = 0.0  # Only horizontal movement
 
 	knob.position = _output * MAX_RADIUS
 
-	# Feed into Input actions
 	_update_input_actions()
-	emit_signal("moved", _output)
+	moved.emit(_output)
 
 
 func _reset() -> void:
@@ -61,21 +60,19 @@ func _reset() -> void:
 	_output = Vector2.ZERO
 	knob.position = Vector2.ZERO
 	_update_input_actions()
-	emit_signal("released")
+	released.emit()
 
 
 func _update_input_actions() -> void:
-	# Simulate Input actions from the joystick output
-	var input := Input.singleton
 	if _output.x < -DEADZONE:
-		input.parse_input_event(_make_action("move_left", true))
-		input.parse_input_event(_make_action("move_right", false))
+		Input.parse_input_event(_make_action("move_left", true))
+		Input.parse_input_event(_make_action("move_right", false))
 	elif _output.x > DEADZONE:
-		input.parse_input_event(_make_action("move_right", true))
-		input.parse_input_event(_make_action("move_left", false))
+		Input.parse_input_event(_make_action("move_right", true))
+		Input.parse_input_event(_make_action("move_left", false))
 	else:
-		input.parse_input_event(_make_action("move_left", false))
-		input.parse_input_event(_make_action("move_right", false))
+		Input.parse_input_event(_make_action("move_left", false))
+		Input.parse_input_event(_make_action("move_right", false))
 
 
 static func _make_action(action: String, pressed: bool) -> InputEventAction:

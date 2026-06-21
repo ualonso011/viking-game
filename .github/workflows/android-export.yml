@@ -49,6 +49,9 @@ jobs:
           java-version: 17
           distribution: 'temurin'
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
       - name: Create Android debug keystore
         run: |
           keytool -genkey -v -keystore ${{ github.workspace }}/android.keystore \
@@ -58,11 +61,36 @@ jobs:
           # Point export_presets.cfg to the generated keystore
           sed -i 's|keystore/debug=""|keystore/debug="'"${{ github.workspace }}"'/android.keystore"|' export_presets.cfg
 
-      - name: Export Android APK
+      - name: Validate project and export
         run: |
           mkdir -p build
+          
+          # Check Godot binary
+          echo "=== Godot version ==="
+          ./Godot_v4.3-stable_linux.x86_64 --headless --version 2>&1 || echo "GODOT_BINARY_FAILED"
+          
+          # Check export templates
+          echo "=== Export templates ==="
+          ls -la ~/.local/share/godot/export_templates/4.3.stable/ 2>&1
+          
+          # Check project.godot key lines
+          echo "=== Rendering config ==="
+          grep -n "rendering" project.godot
+          
+          echo "=== Export preset config ==="
+          head -10 export_presets.cfg
+          
+          echo "=== Android SDK ==="
+          echo "ANDROID_HOME=${ANDROID_HOME:-not set}"
+          echo "ANDROID_SDK_ROOT=${ANDROID_SDK_ROOT:-not set}"
+          
+          # Run export with full output
+          echo "=== Running export ==="
           ./Godot_v4.3-stable_linux.x86_64 --headless \
-            --export-debug "Android" build/${{ env.EXPORT_NAME }}.apk 2>&1
+            --export-debug "Android" "build/${{ env.EXPORT_NAME }}.apk" 2>&1
+          EXIT_CODE=$?
+          echo "=== Exit code: $EXIT_CODE ==="
+          exit $EXIT_CODE
 
       - name: Upload APK as Artifact
         uses: actions/upload-artifact@v4

@@ -8,7 +8,13 @@ const BUTTON_SIZE_RATIO: float = 0.022
 
 
 func _ready() -> void:
+	# Ensure the button has a proper minimum size (belt + suspenders)
+	$VBoxContainer/StartButton.custom_minimum_size = Vector2(300, 60)
+
 	_style_button($VBoxContainer/StartButton)
+	# button_down fires on touch-DOWN (no release ambiguity on Android)
+	$VBoxContainer/StartButton.button_down.connect(_on_start_pressed)
+	# button_up as backup
 	$VBoxContainer/StartButton.button_up.connect(_on_start_pressed)
 
 	var vp_height: float = get_viewport().get_visible_rect().size.y

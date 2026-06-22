@@ -1,71 +1,67 @@
 extends Node
 ## Root game manager. Handles scene transitions, game states.
+## NO type hints — some break Godot 4.3 Android export.
 
 enum GameStateEnum { MENU, PLAYING, CUTSCENE, PAUSED }
 
-var current_state: GameStateEnum = GameStateEnum.MENU
+var current_state = GameStateEnum.MENU
 
 @onready var main_menu = $MainMenu
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var fade_rect: ColorRect = $FadeRect
-var current_level: Node = null
+@onready var animation_player = $AnimationPlayer
+@onready var fade_rect = $FadeRect
+var current_level = null
 
 
 func _ready() -> void:
-	# Register in group so MainMenu can find us
 	add_to_group("game_manager")
 
 	main_menu.visible = true
 	$HUD.visible = false
 	$TouchControls.visible = false
 
-
-	# Fade-in at start
 	if animation_player.has_animation("fade_in"):
 		animation_player.play("fade_in")
 
 
 func _on_start_game() -> void:
-	main_menu.visible = false
-	$HUD.visible = true
-	$TouchControls.visible = true
+	if main_menu:
+		main_menu.visible = false
+	if $HUD:
+		$HUD.visible = true
+	if $TouchControls:
+		$TouchControls.visible = true
 	current_state = GameStateEnum.PLAYING
 	load_level("res://scenes/levels/level_01.tscn")
 
 
-func load_level(path: String) -> void:
-	# Remove previous level
+func load_level(path) -> void:
 	if current_level:
 		current_level.queue_free()
 		current_level = null
 
-	# Fade out
-	if animation_player.has_animation("fade_out"):
+	if animation_player and animation_player.has_animation("fade_out"):
 		animation_player.play("fade_out")
 		await animation_player.animation_finished
 
-	# Load new level
-	var level_res: PackedScene = load(path)
+	var level_res = load(path)
 	if level_res:
 		current_level = level_res.instantiate()
 		add_child(current_level)
-		move_child(current_level, 0)  # Behind UI
+		move_child(current_level, 0)
 
-		# Reset player state
 		GameState.reset_for_level()
 
-		# Show level name in HUD
-		var level_name: String = path.get_file().trim_suffix(".tscn")
-		$HUD.show_level_name(level_name.capitalize())
+		var level_name = path.get_file().trim_suffix(".tscn")
+		if $HUD and $HUD.has_method("show_level_name"):
+			$HUD.show_level_name(level_name.capitalize())
 
-		# Fade in
-		if animation_player.has_animation("fade_in"):
+		if animation_player and animation_player.has_animation("fade_in"):
 			animation_player.play("fade_in")
 	else:
 		push_error("Failed to load level: " + path)
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(event) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if current_state == GameStateEnum.PLAYING:
 			current_state = GameStateEnum.PAUSED

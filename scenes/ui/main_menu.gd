@@ -75,28 +75,31 @@ func _on_start_pressed() -> void:
 	# Debug: confirm this code runs
 	$Background.color = Color(0, 0.4, 0, 1)
 
-	# Strategy 1: group lookup (Main registers itself in a group)
-	var mains = get_tree().get_nodes_in_group("game_manager")
-	if mains.size() > 0 and mains[0].has_method(&"_on_start_game"):
-		mains[0]._on_start_game()
-		return
-
-	# Strategy 2: find Main by iterating ALL root children
+	# Try calling Main if it has the method
 	for child in get_tree().root.get_children():
 		if child.has_method(&"_on_start_game"):
 			child._on_start_game()
 			return
 
-	# Debug: show what's in the tree
-	$Background.color = Color(0.6, 0, 0, 1)
-	var dbg := Label.new()
-	dbg.text = "ERROR: Main not found\nRoot children:"
-	for child in get_tree().root.get_children():
-		dbg.text += "\n  " + child.name + " (" + child.get_class() + ")"
-		if child.has_method(&"_on_start_game"):
-			dbg.text += " ← HAS IT!"
-	dbg.add_theme_color_override("font_color", Color(1, 1, 0, 1))
-	dbg.add_theme_font_size_override("font_size", 18)
-	dbg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(dbg)
-	push_error("MainMenu: cannot find Main._on_start_game()")
+	# Fallback: preserve Main tree — just add level as child
+	var root_main = get_tree().root.get_node_or_null("Main")
+	if root_main:
+		var hud = root_main.get_node_or_null("HUD")
+		if hud:
+			hud.visible = true
+		var tc = root_main.get_node_or_null("TouchControls")
+		if tc:
+			tc.visible = true
+
+		var lvl = load("res://scenes/levels/level_01.tscn")
+		if lvl:
+			var level_inst = lvl.instantiate()
+			root_main.add_child(level_inst)
+			root_main.move_child(level_inst, 0)
+			GameState.reset_for_level()
+			queue_free()  # Remove this menu
+			return
+
+	# Last resort: replace scene tree entirely
+	GameState.reset_for_level()
+	get_tree().change_scene_to_file("res://scenes/levels/level_01.tscn")

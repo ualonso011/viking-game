@@ -1,25 +1,28 @@
 extends CanvasLayer
-## Main menu screen. Calls Main._on_start_game() directly on button press.
+## Main menu screen.
+## Debug: background turns GREEN on any touch, RED if Main not found.
 
-## Font size as fraction of viewport height (Title)
 const TITLE_SIZE_RATIO: float = 0.045
-## Font size as fraction of viewport height (Subtitle)
 const SUBTITLE_SIZE_RATIO: float = 0.022
-## Font size as fraction of viewport height (Button)
 const BUTTON_SIZE_RATIO: float = 0.022
 
 
 func _ready() -> void:
 	_style_button($VBoxContainer/StartButton)
-
-	# Use button_up (unambiguous signal — no property conflict)
 	$VBoxContainer/StartButton.button_up.connect(_on_start_pressed)
 
-	# Scale fonts to viewport height
 	var vp_height: float = get_viewport().get_visible_rect().size.y
 	$VBoxContainer/TitleLabel.add_theme_font_size_override("font_size", max(16, int(vp_height * TITLE_SIZE_RATIO)))
 	$VBoxContainer/SubtitleLabel.add_theme_font_size_override("font_size", max(12, int(vp_height * SUBTITLE_SIZE_RATIO)))
 	$VBoxContainer/StartButton.add_theme_font_size_override("font_size", max(14, int(vp_height * BUTTON_SIZE_RATIO)))
+
+
+## Catch ANY touch anywhere — finger down starts the game
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch and event.pressed:
+		_on_start_pressed()
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		_on_start_pressed()
 
 
 func _style_button(btn: Button) -> void:
@@ -66,9 +69,21 @@ func _style_button(btn: Button) -> void:
 
 
 func _on_start_pressed() -> void:
-	# Direct call — no signals, no typed-variable issues
+	# Debug: background turns GREEN to confirm this code runs
+	$Background.color = Color(0, 0.6, 0, 1)
+
+	# Try multiple ways to find Main
 	var main = get_parent()
+	if main == null or not main.has_method(&"_on_start_game"):
+		main = get_node("/root/Main")
+	if main == null or not main.has_method(&"_on_start_game"):
+		main = get_tree().current_scene
+	if main == null or not main.has_method(&"_on_start_game"):
+		main = get_tree().root.get_child(0)
+
 	if main and main.has_method(&"_on_start_game"):
 		main._on_start_game()
 	else:
+		# Debug: show error on screen
+		$Background.color = Color(0.6, 0, 0, 1)
 		push_error("MainMenu: cannot find Main._on_start_game()")

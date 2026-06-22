@@ -12,6 +12,9 @@ var current_level: Node = null
 
 
 func _ready() -> void:
+	# Register in group so MainMenu can find us
+	add_to_group("game_manager")
+
 	main_menu.visible = true
 	$HUD.visible = false
 	$TouchControls.visible = false

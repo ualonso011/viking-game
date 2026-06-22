@@ -1,6 +1,7 @@
 extends CanvasLayer
 ## Main menu screen.
-## Debug: background turns GREEN on any touch, RED if Main not found.
+## Debug: background GREEN = press detected, RED = Main not found.
+## Shows root children names in yellow when Main is not found.
 
 const TITLE_SIZE_RATIO: float = 0.045
 const SUBTITLE_SIZE_RATIO: float = 0.022
@@ -8,13 +9,9 @@ const BUTTON_SIZE_RATIO: float = 0.022
 
 
 func _ready() -> void:
-	# Ensure the button has a proper minimum size (belt + suspenders)
 	$VBoxContainer/StartButton.custom_minimum_size = Vector2(300, 60)
-
 	_style_button($VBoxContainer/StartButton)
-	# button_down fires on touch-DOWN (no release ambiguity on Android)
 	$VBoxContainer/StartButton.button_down.connect(_on_start_pressed)
-	# button_up as backup
 	$VBoxContainer/StartButton.button_up.connect(_on_start_pressed)
 
 	var vp_height: float = get_viewport().get_visible_rect().size.y
@@ -75,21 +72,31 @@ func _style_button(btn: Button) -> void:
 
 
 func _on_start_pressed() -> void:
-	# Debug: background turns GREEN to confirm this code runs
-	$Background.color = Color(0, 0.6, 0, 1)
+	# Debug: confirm this code runs
+	$Background.color = Color(0, 0.4, 0, 1)
 
-	# Try multiple ways to find Main
-	var main = get_parent()
-	if main == null or not main.has_method(&"_on_start_game"):
-		main = get_node("/root/Main")
-	if main == null or not main.has_method(&"_on_start_game"):
-		main = get_tree().current_scene
-	if main == null or not main.has_method(&"_on_start_game"):
-		main = get_tree().root.get_child(0)
+	# Strategy 1: group lookup (Main registers itself in a group)
+	var mains = get_tree().get_nodes_in_group("game_manager")
+	if mains.size() > 0 and mains[0].has_method(&"_on_start_game"):
+		mains[0]._on_start_game()
+		return
 
-	if main and main.has_method(&"_on_start_game"):
-		main._on_start_game()
-	else:
-		# Debug: show error on screen
-		$Background.color = Color(0.6, 0, 0, 1)
-		push_error("MainMenu: cannot find Main._on_start_game()")
+	# Strategy 2: find Main by iterating ALL root children
+	for child in get_tree().root.get_children():
+		if child.has_method(&"_on_start_game"):
+			child._on_start_game()
+			return
+
+	# Debug: show what's in the tree
+	$Background.color = Color(0.6, 0, 0, 1)
+	var dbg := Label.new()
+	dbg.text = "ERROR: Main not found\nRoot children:"
+	for child in get_tree().root.get_children():
+		dbg.text += "\n  " + child.name + " (" + child.get_class() + ")"
+		if child.has_method(&"_on_start_game"):
+			dbg.text += " ← HAS IT!"
+	dbg.add_theme_color_override("font_color", Color(1, 1, 0, 1))
+	dbg.add_theme_font_size_override("font_size", 18)
+	dbg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	add_child(dbg)
+	push_error("MainMenu: cannot find Main._on_start_game()")

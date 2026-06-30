@@ -1,9 +1,29 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_gfldj"]
 
+[sub_resource type="Gradient" id="Gradient_1trm7"]
+colors = [Color(0.05, 0.05, 0.08, 0.6), Color(0.05, 0.05, 0.08, 0.0)]
+offsets = [0.0, 1.0]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bmfwc"]
+fill_to = 0
+gradient = SubResource("Gradient_1trm7")
+
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_gfldj")
+
+[node name="Vignette" type="ColorRect" parent="."]
+layout_mode = 0
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_bottom = 162.0
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+texture = SubResource("GradientTexture2D_bmfwc")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 offset_left = 16.0

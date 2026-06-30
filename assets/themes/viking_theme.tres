@@ -1,0 +1,18 @@
+[gd_resource type="Theme" format=3]
+
+[resource]
+# Viking "Ash & Ember" palette
+# Dark: #0D0D14  |  Ember: #B2611C  |  Ash: #4A4A52  |  Bone: #F0E8DA
+
+# Default theme colors
+default_font = null
+
+# Label defaults
+Label/colors/font_color = Color(0.94, 0.91, 0.85, 1.0)          # Bone
+Label/colors/font_outline_color = Color(0.0, 0.0, 0.0, 1.0)
+
+# Button defaults
+Button/colors/font_color = Color(0.94, 0.91, 0.85, 1.0)          # Bone
+Button/colors/font_hover_color = Color(0.94, 0.91, 0.85, 1.0)    # Bone
+Button/colors/font_pressed_color = Color(0.7, 0.38, 0.11, 1.0)   # Ember
+Button/colors/font_disabled_color = Color(0.29, 0.29, 0.32, 1.0) # Ash

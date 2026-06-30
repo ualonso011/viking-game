@@ -11,19 +11,22 @@ extends CanvasLayer
 
 var level_name_timer: float = 0.0
 var checkpoint_timer: float = 0.0
+var _displayed_hp: float = 0.0
 
 
 func _ready() -> void:
+	_displayed_hp = game_state.current_hp
 	level_name.modulate.a = 0.0
 	checkpoint_banner.modulate.a = 0.0
 
 
 func _process(delta: float) -> void:
-	# Health bar
+	# Health bar (smooth lerp)
 	var max_hp: int = game_state.max_hp
 	var cur_hp: int = game_state.current_hp
+	_displayed_hp = lerp(_displayed_hp, float(cur_hp), 1.0 - exp(-10.0 * delta))
 	health_bar.max_value = max_hp
-	health_bar.value = cur_hp
+	health_bar.value = _displayed_hp
 	health_label.text = str(cur_hp) + "/" + str(max_hp)
 
 	# Fury cooldown

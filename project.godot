@@ -58,6 +58,7 @@ renderer/rendering_method="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 
 [autoload]
+game_manager="*res://autoload/game_manager.gd"
 game_state="*res://autoload/game_state.gd"
 audio_manager="*res://autoload/audio_manager.gd"
 narrative_db="*res://autoload/narrative_db.gd"

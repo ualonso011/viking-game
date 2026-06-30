@@ -1,7 +1,5 @@
 extends CanvasLayer
-## Main menu screen.
-## Debug: background GREEN = press detected, RED = Main not found.
-## Shows root children names in yellow when Main is not found.
+## Main menu screen. Calls GameManager.start_game() directly.
 
 const TITLE_SIZE_RATIO: float = 0.045
 const SUBTITLE_SIZE_RATIO: float = 0.022
@@ -20,7 +18,6 @@ func _ready() -> void:
 	$VBoxContainer/StartButton.add_theme_font_size_override("font_size", max(14, int(vp_height * BUTTON_SIZE_RATIO)))
 
 
-## Catch ANY touch anywhere — finger down starts the game
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and event.pressed:
 		_on_start_pressed()
@@ -72,34 +69,4 @@ func _style_button(btn: Button) -> void:
 
 
 func _on_start_pressed() -> void:
-	# Debug: confirm this code runs
-	$Background.color = Color(0, 0.4, 0, 1)
-
-	# Try calling Main if it has the method
-	for child in get_tree().root.get_children():
-		if child.has_method(&"_on_start_game"):
-			child._on_start_game()
-			return
-
-	# Fallback: preserve Main tree — just add level as child
-	var root_main = get_tree().root.get_node_or_null("Main")
-	if root_main:
-		var hud = root_main.get_node_or_null("HUD")
-		if hud:
-			hud.visible = true
-		var tc = root_main.get_node_or_null("TouchControls")
-		if tc:
-			tc.visible = true
-
-		var lvl = load("res://scenes/levels/level_01.tscn")
-		if lvl:
-			var level_inst = lvl.instantiate()
-			root_main.add_child(level_inst)
-			root_main.move_child(level_inst, 0)
-			GameState.reset_for_level()
-			queue_free()  # Remove this menu
-			return
-
-	# Last resort: replace scene tree entirely
-	GameState.reset_for_level()
-	get_tree().change_scene_to_file("res://scenes/levels/level_01.tscn")
+	GameManager.start_game()

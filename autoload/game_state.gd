@@ -7,7 +7,7 @@ var current_level: int = 1
 var max_hp: int = 3
 var current_hp: int = 3
 var base_damage: float = 1.0
-var fury_unlocked: bool = false
+var fury_unlocked: bool = false: set = _set_fury_unlocked
 var fury_active: bool = false
 var fury_cooldown_timer: float = 0.0
 var last_checkpoint: Vector2 = Vector2.ZERO

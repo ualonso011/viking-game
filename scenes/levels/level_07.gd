@@ -23,8 +23,8 @@ func _ready() -> void:
 		hud.show_level_name("The Ash Battlefield", 3.0)
 
 	if player:
-		GameState.last_checkpoint = player.global_position
-		GameState.checkpoint_level = "res://scenes/levels/level_07.tscn"
+		game_state.last_checkpoint = player.global_position
+		game_state.checkpoint_level = "res://scenes/levels/level_07.tscn"
 
 	# Boss is stronger for final fight; starts asleep
 	if boss:
@@ -38,7 +38,7 @@ func _ready() -> void:
 func _on_story_trigger(body: Node) -> void:
 	if body.is_in_group("player") and not story_played:
 		story_played = true
-		cutscene.play_cutscene(NarrativeDB.final_boss_intro())
+		cutscene.play_cutscene(narrative_db.final_boss_intro())
 		if boss:
 			await cutscene.cutscene_finished
 			boss.set_physics_process(true)
@@ -46,12 +46,12 @@ func _on_story_trigger(body: Node) -> void:
 
 func _on_checkpoint_entered(body: Node) -> void:
 	if body.is_in_group("player"):
-		GameState.last_checkpoint = checkpoint.global_position
-		GameState.current_hp = GameState.max_hp
+		game_state.last_checkpoint = checkpoint.global_position
+		game_state.current_hp = game_state.max_hp
 		var hud = get_node_or_null("/root/Main/HUD")
 		if hud and hud.has_method("show_checkpoint"):
 			hud.show_checkpoint()
-		GameState.upgrade_max_hp(1)
+		game_state.upgrade_max_hp(1)
 
 
 func _on_end_trigger_entered(body: Node) -> void:
@@ -61,13 +61,9 @@ func _on_end_trigger_entered(body: Node) -> void:
 		if boss and boss.hp > 0:
 			return
 		# Play tragic ending cutscene
-		cutscene.play_cutscene(NarrativeDB.final_boss_defeat())
+		cutscene.play_cutscene(narrative_db.final_boss_defeat())
 		await cutscene.cutscene_finished
 		await get_tree().create_timer(2.0).timeout
-		# Return to main menu
-		GameState.reset()
-		var main = get_node_or_null("/root/Main")
-		if main:
-			main.current_state = 0
-			get_tree().paused = false
-			get_tree().change_scene_to_file("res://scenes/main/main.tscn")
+		# Return to main menu via GameManager
+		game_state.reset()
+		game_manager.return_to_menu()

@@ -1,5 +1,5 @@
 extends CanvasLayer
-## Main menu screen. Calls GameManager.start_game() directly.
+## Main menu screen. Calls game_manager.start_game() directly.
 
 const TITLE_SIZE_RATIO: float = 0.045
 const SUBTITLE_SIZE_RATIO: float = 0.022
@@ -69,4 +69,4 @@ func _style_button(btn: Button) -> void:
 
 
 func _on_start_pressed() -> void:
-	GameManager.start_game()
+	game_manager.start_game()

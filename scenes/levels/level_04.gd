@@ -17,14 +17,14 @@ func _ready() -> void:
 		hud.show_level_name("Warpath", 3.0)
 
 	if player:
-		GameState.last_checkpoint = player.global_position
-		GameState.checkpoint_level = "res://scenes/levels/level_04.tscn"
+		game_state.last_checkpoint = player.global_position
+		game_state.checkpoint_level = "res://scenes/levels/level_04.tscn"
 
 
 func _on_checkpoint_entered(body: Node) -> void:
 	if body.is_in_group("player"):
-		GameState.last_checkpoint = checkpoint.global_position
-		GameState.current_hp = GameState.max_hp
+		game_state.last_checkpoint = checkpoint.global_position
+		game_state.current_hp = game_state.max_hp
 		var hud = get_node_or_null("/root/Main/HUD")
 		if hud and hud.has_method("show_checkpoint"):
 			hud.show_checkpoint()
@@ -32,10 +32,10 @@ func _on_checkpoint_entered(body: Node) -> void:
 
 func _on_end_trigger_entered(body: Node) -> void:
 	if body.is_in_group("player"):
-		GameState.add_level_damage_bonus()
-		GameState.current_level = 5
+		game_state.add_level_damage_bonus()
+		game_state.current_level = 5
 		# Upgrade max HP at this milestone
-		GameState.upgrade_max_hp(1)
+		game_state.upgrade_max_hp(1)
 		var main = get_node_or_null("/root/Main")
 		if main and main.has_method("load_level"):
-			main.load_level("res://scenes/levels/level_05.tscn")
+			game_manager.load_level("res://scenes/levels/level_05.tscn")

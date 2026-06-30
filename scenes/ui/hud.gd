@@ -20,20 +20,20 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Health bar
-	var max_hp: int = GameState.max_hp
-	var cur_hp: int = GameState.current_hp
+	var max_hp: int = game_state.max_hp
+	var cur_hp: int = game_state.current_hp
 	health_bar.max_value = max_hp
 	health_bar.value = cur_hp
 	health_label.text = str(cur_hp) + "/" + str(max_hp)
 
 	# Fury cooldown
-	if GameState.fury_unlocked:
+	if game_state.fury_unlocked:
 		fury_icon.visible = true
-		if GameState.fury_cooldown_timer > 0:
+		if game_state.fury_cooldown_timer > 0:
 			var max_cd: float = 30.0
-			fury_cooldown.value = GameState.fury_cooldown_timer
+			fury_cooldown.value = game_state.fury_cooldown_timer
 			fury_cooldown.max_value = max_cd
-			fury_label.text = str(ceil(GameState.fury_cooldown_timer)) + "s"
+			fury_label.text = str(ceil(game_state.fury_cooldown_timer)) + "s"
 			fury_icon.modulate = Color(0.5, 0.5, 0.5, 0.5)
 		else:
 			fury_cooldown.value = 0

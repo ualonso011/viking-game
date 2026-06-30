@@ -69,7 +69,7 @@ var invuln_timer: float = 0.0
 
 func _ready() -> void:
 	state = State.IDLE
-	GameState.current_hp = GameState.max_hp
+	game_state.current_hp = game_state.max_hp
 	update_attack_damage()
 	atk_area.body_entered.connect(_on_attack_area_body_entered)
 
@@ -84,8 +84,8 @@ func _physics_process(delta: float) -> void:
 		fury_timer -= delta
 		if fury_timer <= 0:
 			end_fury()
-	if GameState.fury_cooldown_timer > 0:
-		GameState.fury_cooldown_timer -= delta
+	if game_state.fury_cooldown_timer > 0:
+		game_state.fury_cooldown_timer -= delta
 	if invuln_timer > 0:
 		invuln_timer -= delta
 		sprite.modulate.a = 0.5 if int(invuln_timer * 10) % 2 == 0 else 1.0
@@ -155,7 +155,7 @@ func _physics_process(delta: float) -> void:
 	# Death plane: kill player if fallen out of world
 	if global_position.y > 1200:
 		if state != State.DEAD:
-			GameState.take_damage(GameState.current_hp)
+			game_state.take_damage(game_state.current_hp)
 			die()
 
 	move_and_slide()
@@ -187,12 +187,12 @@ func start_attack(heavy: bool) -> void:
 	is_heavy = heavy
 	if heavy:
 		state = State.ATTACK_HEAVY
-		atk_damage = HEAVY_ATK_DMG * int(GameState.get_damage())
+		atk_damage = HEAVY_ATK_DMG * int(game_state.get_damage())
 		atk_timer = HEAVY_ATK_DURATION
 		atk_cooldown = HEAVY_ATK_CD
 	else:
 		state = State.ATTACK_LIGHT
-		atk_damage = LIGHT_ATK_DMG * int(GameState.get_damage())
+		atk_damage = LIGHT_ATK_DMG * int(game_state.get_damage())
 		atk_timer = LIGHT_ATK_DURATION
 		atk_cooldown = LIGHT_ATK_CD
 
@@ -216,7 +216,7 @@ func handle_dash_start() -> void:
 		dash_dir = 1.0 if facing_right else -1.0
 
 	# Fury activation
-	if Input.is_action_just_pressed("fury") and GameState.fury_unlocked and GameState.fury_cooldown_timer <= 0 and fury_timer <= 0:
+	if Input.is_action_just_pressed("fury") and game_state.fury_unlocked and game_state.fury_cooldown_timer <= 0 and fury_timer <= 0:
 		activate_fury()
 
 
@@ -226,8 +226,8 @@ func take_damage(amount: int, knockback_dir: Vector2) -> void:
 	if state == State.DASH:
 		return
 
-	GameState.take_damage(amount)
-	if GameState.current_hp <= 0:
+	game_state.take_damage(amount)
+	if game_state.current_hp <= 0:
 		state = State.DEAD
 		die()
 		return
@@ -245,7 +245,7 @@ func die() -> void:
 
 	# Death-respawn loop guard: if player dies 3+ times at same checkpoint,
 	# respawn at level start instead to prevent softlock
-	var current_cp := GameState.last_checkpoint
+	var current_cp := game_state.last_checkpoint
 	if current_cp == last_death_checkpoint:
 		death_count_at_checkpoint += 1
 	else:
@@ -254,7 +254,7 @@ func die() -> void:
 
 	if death_count_at_checkpoint >= 3:
 		# Force respawn at level start
-		GameState.last_checkpoint = Vector2.ZERO
+		game_state.last_checkpoint = Vector2.ZERO
 		death_count_at_checkpoint = 0
 
 	var tween := create_tween()
@@ -263,9 +263,9 @@ func die() -> void:
 
 
 func _respawn() -> void:
-	GameState.current_hp = GameState.max_hp
-	var level_path := GameState.checkpoint_level
-	if level_path == "" or GameState.last_checkpoint == Vector2.ZERO:
+	game_state.current_hp = game_state.max_hp
+	var level_path := game_state.checkpoint_level
+	if level_path == "" or game_state.last_checkpoint == Vector2.ZERO:
 		get_tree().reload_current_scene()
 	else:
 		get_tree().change_scene_to_file(level_path)
@@ -298,21 +298,21 @@ func update_animation() -> void:
 
 
 func activate_fury() -> void:
-	GameState.fury_active = true
+	game_state.fury_active = true
 	fury_timer = FURY_DURATION
-	GameState.fury_cooldown_timer = FURY_CD
+	game_state.fury_cooldown_timer = FURY_CD
 	# Visual feedback - red tint on sprite
 	sprite.modulate = Color(1.5, 0.5, 0.5, 1)
 	create_tween().tween_interval(0.1)
 
 
 func end_fury() -> void:
-	GameState.fury_active = false
+	game_state.fury_active = false
 	sprite.modulate = Color(1, 1, 1, 1)
 
 
 func update_attack_damage() -> void:
-	atk_damage = int(GameState.get_damage())
+	atk_damage = int(game_state.get_damage())
 
 
 func _on_attack_area_body_entered(body: Node) -> void:

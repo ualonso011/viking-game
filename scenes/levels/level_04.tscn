@@ -115,6 +115,12 @@ position = Vector2(5600, 700)
 [node name="Soldier6" parent="." instance=ExtResource("2_k7x6y")]
 position = Vector2(6500, 700)
 
+[node name="StoryTrigger" type="Area2D" parent="."]
+position = Vector2(1600, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTrigger"]
+shape = SubResource("4")
+
 [node name="Checkpoint" type="Area2D" parent="."]
 position = Vector2(3600, 720)
 

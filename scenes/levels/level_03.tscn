@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2etgx5qthqsi"]
+[gd_scene load_steps=8 format=3 uid="uid://d2etgx5qthqsi"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_03.gd" id="1_jhx7h"]
 [ext_resource type="PackedScene" uid="uid://d4vsnrl0gnk0g" path="res://scenes/enemies/soldier.tscn" id="2_k7x6y"]
 [ext_resource type="PackedScene" uid="uid://dhgjt3jj1vm73" path="res://scenes/player/player.tscn" id="3_wc2hk"]
+[ext_resource type="Texture2D" path="res://assets/sprites/panel_wood.png" id="panel_wood"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(6400, 32)
@@ -32,12 +33,10 @@ position = Vector2(3200, 760)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("1")
 
-[node name="GroundVisual" type="ColorRect" parent="."]
-color = Color(0.2, 0.06, 0.03, 1)
-offset_left = 0
-offset_top = 744
-offset_right = 6400
-offset_bottom = 776
+[node name="GroundVisual" type="Sprite2D" parent="."]
+position = Vector2(3200.0, 760.0)
+scale = Vector2(100.0, 0.5)
+texture = ExtResource("panel_wood")
 
 [node name="Platform1" type="StaticBody2D" parent="."]
 position = Vector2(1200, 600)
@@ -45,12 +44,10 @@ position = Vector2(1200, 600)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
 shape = SubResource("2")
 
-[node name="Plat1Visual" type="ColorRect" parent="."]
-color = Color(0.3, 0.1, 0.05, 1)
-offset_left = 1136
-offset_top = 584
-offset_right = 1264
-offset_bottom = 616
+[node name="Plat1Visual" type="Sprite2D" parent="."]
+position = Vector2(1200.0, 600.0)
+scale = Vector2(2.0, 0.5)
+texture = ExtResource("panel_wood")
 
 [node name="Platform2" type="StaticBody2D" parent="."]
 position = Vector2(2800, 480)
@@ -58,12 +55,10 @@ position = Vector2(2800, 480)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
 shape = SubResource("2")
 
-[node name="Plat2Visual" type="ColorRect" parent="."]
-color = Color(0.3, 0.1, 0.05, 1)
-offset_left = 2736
-offset_top = 464
-offset_right = 2864
-offset_bottom = 496
+[node name="Plat2Visual" type="Sprite2D" parent="."]
+position = Vector2(2800.0, 480.0)
+scale = Vector2(2.0, 0.5)
+texture = ExtResource("panel_wood")
 
 [node name="Platform3" type="StaticBody2D" parent="."]
 position = Vector2(4200, 550)
@@ -71,12 +66,10 @@ position = Vector2(4200, 550)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
 shape = SubResource("2")
 
-[node name="Plat3Visual" type="ColorRect" parent="."]
-color = Color(0.3, 0.1, 0.05, 1)
-offset_left = 4136
-offset_top = 534
-offset_right = 4264
-offset_bottom = 566
+[node name="Plat3Visual" type="Sprite2D" parent="."]
+position = Vector2(4200.0, 550.0)
+scale = Vector2(2.0, 0.5)
+texture = ExtResource("panel_wood")
 
 [node name="WallEnd" type="StaticBody2D" parent="."]
 position = Vector2(6384, 440)

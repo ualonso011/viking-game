@@ -1,24 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmkh7ynkraxpw"]
+[gd_scene load_steps=8 format=3 uid="uid://bmkh7ynkraxpw" base_scene=ExtResource("1_base")]
 
-[ext_resource type="Script" path="res://scenes/levels/level_06.gd" id="1_jhx7h"]
-[ext_resource type="PackedScene" uid="uid://d4vsnrl0gnk0g" path="res://scenes/enemies/soldier.tscn" id="2_k7x6y"]
-[ext_resource type="PackedScene" uid="uid://dhgjt3jj1vm73" path="res://scenes/player/player.tscn" id="3_wc2hk"]
-[ext_resource type="Texture2D" path="res://assets/sprites/panel_wood.png" id="panel_wood"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/levels/level_06.gd" id="2_script"]
+[ext_resource type="PackedScene" uid="uid://d4vsnrl0gnk0g" path="res://scenes/enemies/soldier.tscn" id="3_soldier"]
+[ext_resource type="Texture2D" path="res://assets/sprites/panel_wood.png" id="4_panel_wood"]
 
-[sub_resource type="RectangleShape2D" id="1"]
+[sub_resource type="RectangleShape2D" id="1_ground"]
 size = Vector2(8000, 32)
 
-[sub_resource type="RectangleShape2D" id="2"]
+[sub_resource type="RectangleShape2D" id="2_platform"]
 size = Vector2(128, 32)
 
-[sub_resource type="RectangleShape2D" id="3"]
+[sub_resource type="RectangleShape2D" id="3_wall"]
 size = Vector2(32, 128)
 
-[sub_resource type="RectangleShape2D" id="4"]
+[sub_resource type="RectangleShape2D" id="4_trigger"]
 size = Vector2(128, 64)
 
 [node name="Level06" type="Node2D"]
-script = ExtResource("1_jhx7h")
+script = ExtResource("2_script")
+
+[node name="Checkpoint" parent="."]
+position = Vector2(4000, 720)
+
+[node name="EndTrigger" parent="."]
+position = Vector2(7900, 720)
 
 [node name="BgColor" type="ColorRect" parent="."]
 color = Color(0.1, 0.08, 0.06, 1)
@@ -31,104 +37,95 @@ offset_bottom = 1080
 position = Vector2(4000, 760)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-shape = SubResource("1")
+shape = SubResource("1_ground")
 
 [node name="GroundVisual" type="Sprite2D" parent="."]
 position = Vector2(4000.0, 760.0)
 scale = Vector2(125.0, 0.5)
-texture = ExtResource("panel_wood")
+texture = ExtResource("4_panel_wood")
 
 [node name="Platform1" type="StaticBody2D" parent="."]
 position = Vector2(1500, 620)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
-shape = SubResource("2")
+shape = SubResource("2_platform")
 
 [node name="Plat1Visual" type="Sprite2D" parent="."]
 position = Vector2(1500.0, 620.0)
 scale = Vector2(2.0, 0.5)
-texture = ExtResource("panel_wood")
+texture = ExtResource("4_panel_wood")
 
 [node name="Platform2" type="StaticBody2D" parent="."]
 position = Vector2(3000, 500)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
-shape = SubResource("2")
+shape = SubResource("2_platform")
 
 [node name="Plat2Visual" type="Sprite2D" parent="."]
 position = Vector2(3000.0, 500.0)
 scale = Vector2(2.0, 0.5)
-texture = ExtResource("panel_wood")
+texture = ExtResource("4_panel_wood")
 
 [node name="Platform3" type="StaticBody2D" parent="."]
 position = Vector2(4500, 560)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
-shape = SubResource("2")
+shape = SubResource("2_platform")
 
 [node name="Plat3Visual" type="Sprite2D" parent="."]
 position = Vector2(4500.0, 560.0)
 scale = Vector2(2.0, 0.5)
-texture = ExtResource("panel_wood")
+texture = ExtResource("4_panel_wood")
 
 [node name="Platform4" type="StaticBody2D" parent="."]
 position = Vector2(6000, 480)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
-shape = SubResource("2")
+shape = SubResource("2_platform")
 
 [node name="Plat4Visual" type="Sprite2D" parent="."]
 position = Vector2(6000.0, 480.0)
 scale = Vector2(2.0, 0.5)
-texture = ExtResource("panel_wood")
+texture = ExtResource("4_panel_wood")
 
 [node name="WallEnd" type="StaticBody2D" parent="."]
 position = Vector2(7984, 440)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallEnd"]
-shape = SubResource("3")
+shape = SubResource("3_wall")
 
 [node name="WallStart" type="StaticBody2D" parent="."]
 position = Vector2(16, 440)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallStart"]
-shape = SubResource("3")
+shape = SubResource("3_wall")
 
-[node name="Player" parent="." instance=ExtResource("3_wc2hk")]
-position = Vector2(100, 700)
-
-[node name="Soldier1" parent="." instance=ExtResource("2_k7x6y")]
+[node name="Soldier1" parent="." instance=ExtResource("3_soldier")]
 position = Vector2(800, 700)
 
-[node name="Soldier2" parent="." instance=ExtResource("2_k7x6y")]
+[node name="Soldier2" parent="." instance=ExtResource("3_soldier")]
 position = Vector2(1800, 700)
 
-[node name="Soldier3" parent="." instance=ExtResource("2_k7x6y")]
+[node name="Soldier3" parent="." instance=ExtResource("3_soldier")]
 position = Vector2(2800, 700)
 
-[node name="Soldier4" parent="." instance=ExtResource("2_k7x6y")]
+[node name="Soldier4" parent="." instance=ExtResource("3_soldier")]
 position = Vector2(4000, 700)
 
-[node name="Soldier5" parent="." instance=ExtResource("2_k7x6y")]
+[node name="Soldier5" parent="." instance=ExtResource("3_soldier")]
 position = Vector2(5000, 700)
 
-[node name="Soldier6" parent="." instance=ExtResource("2_k7x6y")]
+[node name="Soldier6" parent="." instance=ExtResource("3_soldier")]
 position = Vector2(5800, 700)
 
-[node name="Soldier7" parent="." instance=ExtResource("2_k7x6y")]
+[node name="Soldier7" parent="." instance=ExtResource("3_soldier")]
 position = Vector2(6600, 700)
 
-[node name="Soldier8" parent="." instance=ExtResource("2_k7x6y")]
+[node name="Soldier8" parent="." instance=ExtResource("3_soldier")]
 position = Vector2(7400, 700)
 
-[node name="Checkpoint" type="Area2D" parent="."]
-position = Vector2(4000, 720)
+[node name="StoryTrigger" type="Area2D" parent="."]
+position = Vector2(1800, 720)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
-shape = SubResource("4")
-
-[node name="EndTrigger" type="Area2D" parent="."]
-position = Vector2(7900, 720)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EndTrigger"]
-shape = SubResource("4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTrigger"]
+shape = SubResource("4_trigger")

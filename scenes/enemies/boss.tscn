@@ -1,9 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://bv7dckwkghm5j"]
+[gd_scene load_steps=23 format=3 uid="uid://bv7dckwkghm5j"]
 
 [ext_resource type="Script" path="res://scenes/enemies/boss.gd" id="1_7aoh0"]
 [ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_idle.png" id="2_idle"]
 [ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_run.png" id="3_run"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_idle.png" id="4_fast"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_idle.png" id="5_heavy"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_idle.png" id="6_hurt"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_idle.png" id="7_dead"]
 [ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_enraged.png" id="8_eidle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_run.png" id="9_erun"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 12.0

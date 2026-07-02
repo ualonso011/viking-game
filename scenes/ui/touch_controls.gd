@@ -11,28 +11,14 @@ extends CanvasLayer
 
 
 func _ready() -> void:
+	theme = preload("res://assets/themes/viking_theme.tres")
+
 	# Wire TouchScreenButtons to Input actions
 	btn_jump.action = "jump"
 	btn_attack_light.action = "attack_light"
 	btn_attack_heavy.action = "attack_heavy"
 	btn_dash.action = "dash"
 	btn_fury.action = "fury"
-
-	# Assign CircleShape2D shapes for touch detection
-	# Right-side action buttons: radius 80px
-	var right_shape = CircleShape2D.new()
-	right_shape.radius = 80
-	btn_jump.shape = right_shape
-	btn_attack_light.shape = right_shape
-	btn_attack_heavy.shape = right_shape
-	btn_dash.shape = right_shape
-	btn_fury.shape = right_shape
-
-	# Left-side movement buttons: radius 60px
-	var left_shape = CircleShape2D.new()
-	left_shape.radius = 60
-	btn_left.shape = left_shape
-	btn_right.shape = left_shape
 
 	# Hide fury button until unlocked
 	btn_fury.visible = false

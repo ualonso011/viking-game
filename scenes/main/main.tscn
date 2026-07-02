@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1k7f7pu4dbgs"]
+[gd_scene load_steps=10 format=3 uid="uid://d1k7f7pu4dbgs"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_causg"]
 [ext_resource type="PackedScene" uid="uid://dlnv6tfw4bkac" path="res://scenes/ui/main_menu.tscn" id="2_yc7q7"]
 [ext_resource type="PackedScene" uid="uid://cjt8rskyow3cc" path="res://scenes/ui/hud.tscn" id="3_shq46"]
 [ext_resource type="PackedScene" uid="uid://bvbmrme1u1oyj" path="res://scenes/ui/touch_controls.tscn" id="4_c2r54"]
+[ext_resource type="PackedScene" path="res://scenes/ui/options_panel.tscn" id="5_opts"]
+[ext_resource type="PackedScene" path="res://scenes/ui/credits_panel.tscn" id="6_credits"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_overlay.tscn" id="7_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/game_over_screen.tscn" id="8_go"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "fade_out"
@@ -60,3 +64,11 @@ anims/fade_in = SubResource("2")
 [node name="HUD" parent="." instance=ExtResource("3_shq46")]
 
 [node name="TouchControls" parent="." instance=ExtResource("4_c2r54")]
+
+[node name="OptionsPanel" parent="." instance=ExtResource("5_opts")]
+
+[node name="CreditsPanel" parent="." instance=ExtResource("6_credits")]
+
+[node name="PauseOverlay" parent="." instance=ExtResource("7_pause")]
+
+[node name="GameOverScreen" parent="." instance=ExtResource("8_go")]

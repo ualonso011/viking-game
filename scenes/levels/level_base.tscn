@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/levels/level_base.gd" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://dhgjt3jj1vm73" path="res://scenes/player/player.tscn" id="2_player"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(128, 64)
+
+[node name="LevelBase" type="Node2D"]
+script = ExtResource("1_base")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(100, 700)
+
+[node name="Checkpoint" type="Area2D" parent="."]
+position = Vector2(3200, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+shape = SubResource("1")
+
+[node name="EndTrigger" type="Area2D" parent="."]
+position = Vector2(6300, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndTrigger"]
+shape = SubResource("1")

@@ -139,6 +139,15 @@ func return_to_menu() -> void:
 	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
 
 
+func restart_level() -> void:
+	current_state = GameState.PLAYING
+	get_tree().paused = false
+	var level_path := game_state.checkpoint_level
+	if level_path == "":
+		level_path = "res://scenes/levels/level_01.tscn"
+	await load_level(level_path)
+
+
 func _on_pause_resume() -> void:
 	toggle_pause(false)
 

@@ -1,6 +1,14 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_04k3l"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_idle.png" id="2_idle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_run.png" id="3_run"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_attack_light.png" id="4_atkl"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_attack_heavy.png" id="5_atkh"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_jump.png" id="6_jump"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_dash.png" id="7_dash"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_hurt.png" id="8_hurt"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_dead.png" id="9_dead"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 8.0
@@ -11,6 +19,25 @@ size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run0"]
+atlas = ExtResource("3_run")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run1"]
+atlas = ExtResource("3_run")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run2"]
+atlas = ExtResource("3_run")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run3"]
+atlas = ExtResource("3_run")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xyovdt"]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("2_idle")}], "loop": true, "name": &"idle", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_run0")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_run1")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_run2")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_run3")}], "loop": true, "name": &"run", "speed": 8.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("4_atkl")}], "loop": true, "name": &"attack_light", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("5_atkh")}], "loop": true, "name": &"attack_heavy", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("6_jump")}], "loop": true, "name": &"jump", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("7_dash")}], "loop": true, "name": &"dash", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("8_hurt")}], "loop": true, "name": &"hurt", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("9_dead")}], "loop": false, "name": &"dead", "speed": 5.0}]
 
 [node name="Player" type="CharacterBody2D"]
 groups = ["player"]
@@ -29,7 +56,7 @@ modulate = Color(1, 1, 1, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
-sprite_frames = null
+sprite_frames = SubResource("SpriteFrames_xyovdt")
 animation = &"idle"
 playing = false
 

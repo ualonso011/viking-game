@@ -1,18 +1,23 @@
 [gd_resource type="Theme" format=3]
 
+[ext_resource type="FontFile" path="res://assets/fonts/Cinzel-Regular.ttf" id="1_cinzel"]
+[ext_resource type="StyleBoxTexture" path="res://assets/themes/panel_wood.tres" id="2_panel"]
+
 [resource]
-# Viking "Ash & Ember" palette
-# Dark: #0D0D14  |  Ember: #B2611C  |  Ash: #4A4A52  |  Bone: #F0E8DA
+default_font = ExtResource("1_cinzel")
+default_font_size = 18
 
-# Default theme colors
-default_font = null
+Label/colors/font_color = Color(0.94, 0.91, 0.85, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 0.8)
+Label/constants/outline_size = 2
 
-# Label defaults
-Label/colors/font_color = Color(0.94, 0.91, 0.85, 1.0)          # Bone
-Label/colors/font_outline_color = Color(0.0, 0.0, 0.0, 1.0)
+Button/colors/font_color = Color(0.94, 0.91, 0.85, 1)
+Button/colors/font_hover_color = Color(0.94, 0.91, 0.85, 1)
+Button/colors/font_pressed_color = Color(0.7, 0.38, 0.11, 1)
+Button/colors/font_disabled_color = Color(0.29, 0.29, 0.32, 1)
+Button/styles/normal = ExtResource("2_panel")
+Button/styles/hover = ExtResource("2_panel")
+Button/styles/pressed = ExtResource("2_panel")
+Button/styles/disabled = ExtResource("2_panel")
 
-# Button defaults
-Button/colors/font_color = Color(0.94, 0.91, 0.85, 1.0)          # Bone
-Button/colors/font_hover_color = Color(0.94, 0.91, 0.85, 1.0)    # Bone
-Button/colors/font_pressed_color = Color(0.7, 0.38, 0.11, 1.0)   # Ember
-Button/colors/font_disabled_color = Color(0.29, 0.29, 0.32, 1.0) # Ash
+Panel/styles/panel = ExtResource("2_panel")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2x4t6qhoc7ou"]
+[gd_scene load_steps=8 format=3 uid="uid://d2x4t6qhoc7ou"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_01.gd" id="1_mbdey"]
 [ext_resource type="PackedScene" uid="uid://d4vsnrl0gnk0g" path="res://scenes/enemies/soldier.tscn" id="2_k7x6y"]
 [ext_resource type="PackedScene" uid="uid://dhgjt3jj1vm73" path="res://scenes/player/player.tscn" id="3_wc2hk"]
+[ext_resource type="Texture2D" path="res://assets/sprites/panel_wood.png" id="panel_wood"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(6400, 32)
@@ -45,12 +46,10 @@ position = Vector2(3200, 760)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("1")
 
-[node name="GroundVisual" type="ColorRect" parent="."]
-color = Color(0.29, 0.26, 0.16, 1)
-offset_left = 0
-offset_top = 744
-offset_right = 6400
-offset_bottom = 776
+[node name="GroundVisual" type="Sprite2D" parent="."]
+position = Vector2(3200.0, 760.0)
+scale = Vector2(100.0, 0.5)
+texture = ExtResource("panel_wood")
 
 [node name="Platform1" type="StaticBody2D" parent="."]
 position = Vector2(1200, 600)
@@ -58,12 +57,10 @@ position = Vector2(1200, 600)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
 shape = SubResource("2")
 
-[node name="Plat1Visual" type="ColorRect" parent="."]
-color = Color(0.42, 0.36, 0.24, 1)
-offset_left = 1136
-offset_top = 584
-offset_right = 1264
-offset_bottom = 616
+[node name="Plat1Visual" type="Sprite2D" parent="."]
+position = Vector2(1200.0, 600.0)
+scale = Vector2(2.0, 0.5)
+texture = ExtResource("panel_wood")
 
 [node name="Platform2" type="StaticBody2D" parent="."]
 position = Vector2(2400, 480)
@@ -71,12 +68,10 @@ position = Vector2(2400, 480)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
 shape = SubResource("2")
 
-[node name="Plat2Visual" type="ColorRect" parent="."]
-color = Color(0.42, 0.36, 0.24, 1)
-offset_left = 2336
-offset_top = 464
-offset_right = 2464
-offset_bottom = 496
+[node name="Plat2Visual" type="Sprite2D" parent="."]
+position = Vector2(2400.0, 480.0)
+scale = Vector2(2.0, 0.5)
+texture = ExtResource("panel_wood")
 
 [node name="WallEnd" type="StaticBody2D" parent="."]
 position = Vector2(6384, 440)

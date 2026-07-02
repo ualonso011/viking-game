@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bv7dckwkghm5j"]
+[gd_scene load_steps=18 format=3 uid="uid://bv7dckwkghm5j"]
 
 [ext_resource type="Script" path="res://scenes/enemies/boss.gd" id="1_7aoh0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_idle.png" id="2_idle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_run.png" id="3_run"]
+[ext_resource type="Texture2D" path="res://assets/sprites/enemies/boss_halvard_enraged.png" id="8_eidle"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 12.0
@@ -18,6 +21,41 @@ size = Vector2(64, 32)
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(96, 96)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_run0"]
+atlas = ExtResource("3_run")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run1"]
+atlas = ExtResource("3_run")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run2"]
+atlas = ExtResource("3_run")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run3"]
+atlas = ExtResource("3_run")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erun0"]
+atlas = ExtResource("9_erun")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erun1"]
+atlas = ExtResource("9_erun")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erun2"]
+atlas = ExtResource("9_erun")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erun3"]
+atlas = ExtResource("9_erun")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4kgy1p"]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("2_idle")}], "loop": true, "name": &"idle", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_run0")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_run1")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_run2")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_run3")}], "loop": true, "name": &"run", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("4_fast")}], "loop": true, "name": &"attack_fast", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("5_heavy")}], "loop": true, "name": &"attack_heavy", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("6_hurt")}], "loop": true, "name": &"hurt", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("7_dead")}], "loop": false, "name": &"dead", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("8_eidle")}], "loop": true, "name": &"enraged_idle", "speed": 5.0}, {"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_erun0")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_erun1")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_erun2")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_erun3")}], "loop": true, "name": &"enraged_run", "speed": 8.0}]
+
 [node name="Boss" type="CharacterBody2D"]
 script = ExtResource("1_7aoh0")
 
@@ -29,7 +67,7 @@ shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
-sprite_frames = null
+sprite_frames = SubResource("SpriteFrames_4kgy1p")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 monitoring = true

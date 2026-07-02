@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4r6abwbfm6ng"]
+[gd_scene load_steps=8 format=3 uid="uid://c4r6abwbfm6ng"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_05.gd" id="1_jhx7h"]
 [ext_resource type="PackedScene" uid="uid://dhgjt3jj1vm73" path="res://scenes/player/player.tscn" id="2_wc2hk"]
 [ext_resource type="PackedScene" uid="uid://bv7dckwkghm5j" path="res://scenes/enemies/boss.tscn" id="3_k7x6y"]
 [ext_resource type="PackedScene" uid="uid://d4vsnrl0gnk0g" path="res://scenes/enemies/soldier.tscn" id="4_k7x6y"]
+[ext_resource type="Texture2D" path="res://assets/sprites/panel_wood.png" id="panel_wood"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(3200, 32)
@@ -30,12 +31,10 @@ position = Vector2(1600, 760)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("1")
 
-[node name="GroundVisual" type="ColorRect" parent="."]
-color = Color(0.12, 0.06, 0.04, 1)
-offset_left = 0
-offset_top = 744
-offset_right = 3200
-offset_bottom = 776
+[node name="GroundVisual" type="Sprite2D" parent="."]
+position = Vector2(1600.0, 760.0)
+scale = Vector2(50.0, 0.5)
+texture = ExtResource("panel_wood")
 
 [node name="ArenaWallL" type="StaticBody2D" parent="."]
 position = Vector2(16, 440)

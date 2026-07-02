@@ -11,6 +11,8 @@ extends CanvasLayer
 
 
 func _ready() -> void:
+	theme = preload("res://assets/themes/viking_theme.tres")
+
 	# Wire TouchScreenButtons to Input actions
 	btn_jump.action = "jump"
 	btn_attack_light.action = "attack_light"

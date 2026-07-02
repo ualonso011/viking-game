@@ -72,31 +72,31 @@ Branch: `feature/viking-remodel-audio` (base: PR 1)
 
 ### Phase 2.1 — Audio Bus Config
 
-- [ ] 2.1.1 Add audio bus layout to `project.godot`: Master, Music (-6dB), SFX (0dB), Ambience (-10dB)
+- [x] 2.1.1 Add audio bus layout to `project.godot`: Master, Music (-6dB), SFX (0dB), Ambience (-10dB)
 
 ### Phase 2.2 — Audio Manager Rewrite
 
-- [ ] 2.2.1 Rewrite `autoload/audio_manager.gd`: add MusicPlayer, AmbiencePlayer (looping), SFXPool (8× round-robin)
-- [ ] 2.2.2 Implement `play_music(track, loop)` with cross-fade tween (0.5s)
-- [ ] 2.2.3 Implement `play_sfx(name)` via SFX pool round-robin
-- [ ] 2.2.4 Implement `play_ambience(track)` / `stop_ambience(fade_ms)`
-- [ ] 2.2.5 Implement `set_bus_volume(bus, linear)` / `get_bus_volume(bus)` — 0.0–1.0 → dB conversion
-- [ ] 2.2.6 Add signals: `music_finished`, `bus_volume_changed(bus, linear)`
+- [x] 2.2.1 Rewrite `autoload/audio_manager.gd`: add MusicPlayer, AmbiencePlayer (looping), SFXPool (8× round-robin)
+- [x] 2.2.2 Implement `play_music(track, loop)` with cross-fade tween (0.5s)
+- [x] 2.2.3 Implement `play_sfx(name)` via SFX pool round-robin
+- [x] 2.2.4 Implement `play_ambience(track)` / `stop_ambience(fade_ms)`
+- [x] 2.2.5 Implement `set_bus_volume(bus, linear)` / `get_bus_volume(bus)` — 0.0–1.0 → dB conversion
+- [x] 2.2.6 Add signals: `music_finished`, `bus_volume_changed(bus, linear)`
 
 ### Phase 2.3 — Audio Assets + Attribution
 
-- [ ] 2.3.1 Add 4 music OGGs: menu_theme, farm_ambient, halvard_boss, ash_battlefield → `assets/audio/music/`
-- [ ] 2.3.2 Add 8 SFX OGGs: sword_light/heavy, hit_player/enemy, ui_click/hover, checkpoint, death → `assets/audio/sfx/`
-- [ ] 2.3.3 Add 3 ambience OGGs: wind, fire_crackle, rain → `assets/audio/ambience/`
-- [ ] 2.3.4 Create `assets/audio/ATTRIBUTION.md` (CC0/CC-BY credits)
-- [ ] 2.3.5 Add license texts to `assets/licenses/`
+- [x] 2.3.1 Add 4 music OGGs: menu_theme, farm_ambient, halvard_boss, ash_battlefield → `assets/audio/music/`
+- [x] 2.3.2 Add 8 SFX OGGs: sword_light/heavy, hit_player/enemy, ui_click/hover, checkpoint, death → `assets/audio/sfx/`
+- [x] 2.3.3 Add 3 ambience OGGs: wind, fire_crackle, rain → `assets/audio/ambience/`
+- [x] 2.3.4 Create `assets/audio/ATTRIBUTION.md` (CC0/CC-BY credits)
+- [x] 2.3.5 Add license texts to `assets/licenses/`
 
 ### Phase 2.4 — Theme Application
 
-- [ ] 2.4.1 Apply `theme = preload("res://assets/themes/viking_theme.tres")` in `main_menu.gd._ready()`; remove `_style_button()` and `add_theme_color_override()` calls
-- [ ] 2.4.2 Apply theme in `hud.gd._ready()`; remove hardcoded color overrides from `hud.tscn`
-- [ ] 2.4.3 Apply theme in `touch_controls.gd._ready()`
-- [ ] 2.4.4 Apply theme in `cutscene_manager.gd._ready()`
+- [x] 2.4.1 Apply `theme = preload("res://assets/themes/viking_theme.tres")` in `main_menu.gd._ready()`; remove `_style_button()` and `add_theme_color_override()` calls
+- [x] 2.4.2 Apply theme in `hud.gd._ready()`; remove hardcoded color overrides from `hud.tscn`
+- [x] 2.4.3 Apply theme in `touch_controls.gd._ready()`
+- [x] 2.4.4 Apply theme in `cutscene_manager.gd._ready()`
 
 **Verify**: Music/SFX/ambience play in dev; options sliders adjust bus volume live; all UI uses Cinzel font.
 

@@ -17,7 +17,7 @@ var input_blocked: bool = false
 @onready var portrait_panel: Control = $PortraitPanel
 @onready var portrait_texture: TextureRect = $PortraitPanel/PortraitTexture
 @onready var speaker_label: Label = $PortraitPanel/SpeakerLabel
-@onready var text_panel: Panel = $TextPanel
+@onready var text_panel: ColorRect = $TextPanel
 @onready var text_label: Label = $TextPanel/MarginContainer/Label
 @onready var continue_hint: Label = $TextPanel/ContinueHint
 

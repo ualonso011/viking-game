@@ -22,7 +22,7 @@ stretch_mode = 5
 [node name="PortraitPanel" parent="." instance=ExtResource("2_portrait")]
 visible = false
 
-[node name="TextPanel" type="Panel" parent="."]
+[node name="TextPanel" type="ColorRect" parent="."]
 visible = false
 offset_left = 160.0
 offset_top = 800.0

@@ -46,3 +46,21 @@ layout_mode = 2
 text = "EMPEZAR"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "OPCIONES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "CRÉDITOS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "SALIR"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var fury_label: Label = $FuryIcon/Label
 @onready var level_name: Label = $LevelName
 @onready var checkpoint_banner: Label = $CheckpointBanner
+@onready var pause_button: Button = $PauseButton
 
 var level_name_timer: float = 0.0
 var checkpoint_timer: float = 0.0
@@ -19,6 +20,11 @@ func _ready() -> void:
 	_displayed_hp = game_state.current_hp
 	level_name.modulate.a = 0.0
 	checkpoint_banner.modulate.a = 0.0
+	pause_button.pressed.connect(_on_pause_pressed)
+
+
+func _on_pause_pressed() -> void:
+	game_manager.toggle_pause(true)
 
 
 func _process(delta: float) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_gfldj"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ui/health_bar_bg.png" id="2_hbbg"]
@@ -73,6 +73,14 @@ offset_bottom = 48.0
 text = "F"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PauseButton" type="Button" parent="."]
+process_mode = 3
+offset_left = 1800.0
+offset_top = 96.0
+offset_right = 1864.0
+offset_bottom = 144.0
+text = "II"
 
 [node name="LevelName" type="Label" parent="."]
 layout_mode = 0

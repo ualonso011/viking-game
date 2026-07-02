@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/touch_controls.gd" id="1_qh3d2"]
+
+[sub_resource type="CircleShape2D" id="right_shape"]
+radius = 80.0
+
+[sub_resource type="CircleShape2D" id="left_shape"]
+radius = 60.0
 
 [node name="TouchControls" type="CanvasLayer"]
 layer = 2
@@ -14,7 +20,7 @@ offset_bottom = 1040.0
 
 [node name="JumpBtn" type="TouchScreenButton" parent="RightControls"]
 position = Vector2(320, 320)
-shape = null
+shape = SubResource("right_shape")
 shape_visible = false
 action = "jump"
 passby_press = true
@@ -22,7 +28,7 @@ modulate = Color(1, 1, 1, 0.3)
 
 [node name="AttackLightBtn" type="TouchScreenButton" parent="RightControls"]
 position = Vector2(180, 200)
-shape = null
+shape = SubResource("right_shape")
 shape_visible = false
 action = "attack_light"
 passby_press = true
@@ -30,7 +36,7 @@ modulate = Color(1, 0.3, 0.3, 0.3)
 
 [node name="AttackHeavyBtn" type="TouchScreenButton" parent="RightControls"]
 position = Vector2(300, 200)
-shape = null
+shape = SubResource("right_shape")
 shape_visible = false
 action = "attack_heavy"
 passby_press = true
@@ -38,7 +44,7 @@ modulate = Color(0.8, 0.2, 0.2, 0.3)
 
 [node name="DashBtn" type="TouchScreenButton" parent="RightControls"]
 position = Vector2(240, 80)
-shape = null
+shape = SubResource("right_shape")
 shape_visible = false
 action = "dash"
 passby_press = true
@@ -46,7 +52,7 @@ modulate = Color(0.3, 0.6, 1, 0.3)
 
 [node name="FuryBtn" type="TouchScreenButton" parent="RightControls"]
 position = Vector2(80, 80)
-shape = null
+shape = SubResource("right_shape")
 shape_visible = false
 action = "fury"
 passby_press = true
@@ -60,7 +66,7 @@ offset_bottom = 1040.0
 
 [node name="LeftBtn" type="TouchScreenButton" parent="LeftControls"]
 position = Vector2(60, 200)
-shape = null
+shape = SubResource("left_shape")
 shape_visible = false
 action = "move_left"
 passby_press = true
@@ -68,7 +74,7 @@ modulate = Color(1, 1, 1, 0.3)
 
 [node name="RightBtn" type="TouchScreenButton" parent="LeftControls"]
 position = Vector2(200, 200)
-shape = null
+shape = SubResource("left_shape")
 shape_visible = false
 action = "move_right"
 passby_press = true

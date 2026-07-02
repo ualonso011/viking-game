@@ -108,38 +108,38 @@ Branch: `feature/viking-remodel-menus` (base: PR 2)
 
 ### Phase 3.1 — Main Menu Extension
 
-- [ ] 3.1.1 Add 3 buttons to `main_menu.tscn`: OptionsButton, CreditsButton, ExitButton
-- [ ] 3.1.2 Update `main_menu.gd`: wire Options→options_panel.show(), Credits→credits_panel.show(), Exit→quit()
-- [ ] 3.1.3 Update `_input()` to handle touch/click on all 4 buttons (not just Start)
+- [x] 3.1.1 Add 3 buttons to `main_menu.tscn`: OptionsButton, CreditsButton, ExitButton
+- [x] 3.1.2 Update `main_menu.gd`: wire Options→options_panel.show(), Credits→credits_panel.show(), Exit→quit()
+- [x] 3.1.3 Update `_input()` to handle touch/click on all 4 buttons (not just Start)
 
 ### Phase 3.2 — Options Panel
 
-- [ ] 3.2.1 Create `scenes/ui/options_panel.tscn`: CanvasLayer(11), DimBackground, Panel(9-slice wood), 3× HSlider (Music/SFX/Ambience), CheckButton (fullscreen), CloseButton
-- [ ] 3.2.2 Create `scenes/ui/options_panel.gd`: load/save `user://settings.cfg`, call `audio_manager.set_bus_volume()` on value_changed
-- [ ] 3.2.3 Persist settings: write on change, read on _ready()
+- [x] 3.2.1 Create `scenes/ui/options_panel.tscn`: CanvasLayer(11), DimBackground, Panel(9-slice wood), 3× HSlider (Music/SFX/Ambience), CheckButton (fullscreen), CloseButton
+- [x] 3.2.2 Create `scenes/ui/options_panel.gd`: load/save `user://settings.cfg`, call `audio_manager.set_bus_volume()` on value_changed
+- [x] 3.2.3 Persist settings: write on change, read on _ready()
 
 ### Phase 3.3 — Credits Panel
 
-- [ ] 3.3.1 Create `scenes/ui/credits_panel.tscn`: CanvasLayer(11), Panel(9-slice), ScrollContainer, RichTextLabel (attribution), BackButton
-- [ ] 3.3.2 Create `scenes/ui/credits_panel.gd`: load text from ATTRIBUTION.md; BackButton→hide()
+- [x] 3.3.1 Create `scenes/ui/credits_panel.tscn`: CanvasLayer(11), Panel(9-slice), ScrollContainer, RichTextLabel (attribution), BackButton
+- [x] 3.3.2 Create `scenes/ui/credits_panel.gd`: load text from ATTRIBUTION.md; BackButton→hide()
 
 ### Phase 3.4 — Pause Overlay
 
-- [ ] 3.4.1 Create `scenes/ui/pause_overlay.tscn`: CanvasLayer(12), process_mode=ALWAYS, DimBackground, Panel, Resume/Options/MainMenu buttons
-- [ ] 3.4.2 Create `scenes/ui/pause_overlay.gd`: Resume→emit signal, Options→modal stack, MainMenu→game_manager.return_to_menu()
-- [ ] 3.4.3 Update `game_manager.gd._unhandled_input()`: show/hide pause_overlay on ui_cancel toggle
+- [x] 3.4.1 Create `scenes/ui/pause_overlay.tscn`: CanvasLayer(12), process_mode=ALWAYS, DimBackground, Panel, Resume/Options/MainMenu buttons
+- [x] 3.4.2 Create `scenes/ui/pause_overlay.gd`: Resume→emit signal, Options→modal stack, MainMenu→game_manager.return_to_menu()
+- [x] 3.4.3 Update `game_manager.gd._unhandled_input()`: show/hide pause_overlay on ui_cancel toggle
 
 ### Phase 3.5 — Game Over Screen
 
-- [ ] 3.5.1 Create `scenes/ui/game_over_screen.tscn`: CanvasLayer(12), process_mode=ALWAYS, Panel, "Reintentar"/"Menú" buttons
-- [ ] 3.5.2 Create `scenes/ui/game_over_screen.gd`: Retry→respawn at checkpoint; Menu→return_to_menu()
-- [ ] 3.5.3 Update `game_manager.gd`: add `show_game_over()` method; trigger after 3 deaths at same checkpoint
+- [x] 3.5.1 Create `scenes/ui/game_over_screen.tscn`: CanvasLayer(12), process_mode=ALWAYS, Panel, "Reintentar"/"Menú" buttons
+- [x] 3.5.2 Create `scenes/ui/game_over_screen.gd`: Retry→respawn at checkpoint; Menu→return_to_menu()
+- [x] 3.5.3 Update `game_manager.gd`: add `show_game_over()` method; trigger after 3 deaths at same checkpoint
 
 ### Phase 3.6 — Integration
 
-- [ ] 3.6.1 Add PauseOverlay, GameOverScreen, OptionsPanel, CreditsPanel as children in `scenes/main/main.tscn`
-- [ ] 3.6.2 Move CircleShape2D from `touch_controls.gd` code → `touch_controls.tscn` sub_resources (ADR-007)
-- [ ] 3.6.3 Add pause button (top-right) to `hud.tscn`; wire to game_manager pause toggle
+- [x] 3.6.1 Add PauseOverlay, GameOverScreen, OptionsPanel, CreditsPanel as children in `scenes/main/main.tscn`
+- [x] 3.6.2 Move CircleShape2D from `touch_controls.gd` code → `touch_controls.tscn` sub_resources (ADR-007)
+- [x] 3.6.3 Add pause button (top-right) to `hud.tscn`; wire to game_manager pause toggle
 
 **Verify**: All 4 menu screens reachable; pause toggles on Esc; game-over appears on 3rd death; options persist across runs.
 

@@ -253,9 +253,9 @@ func die() -> void:
 		last_death_checkpoint = current_cp
 
 	if death_count_at_checkpoint >= 3:
-		# Force respawn at level start
-		game_state.last_checkpoint = Vector2.ZERO
-		death_count_at_checkpoint = 0
+		# Too many deaths: show game-over screen instead of looping respawn
+		game_manager.show_game_over()
+		return
 
 	var tween := create_tween()
 	tween.tween_interval(2.0)

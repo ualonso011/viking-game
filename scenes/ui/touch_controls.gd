@@ -20,22 +20,6 @@ func _ready() -> void:
 	btn_dash.action = "dash"
 	btn_fury.action = "fury"
 
-	# Assign CircleShape2D shapes for touch detection
-	# Right-side action buttons: radius 80px
-	var right_shape = CircleShape2D.new()
-	right_shape.radius = 80
-	btn_jump.shape = right_shape
-	btn_attack_light.shape = right_shape
-	btn_attack_heavy.shape = right_shape
-	btn_dash.shape = right_shape
-	btn_fury.shape = right_shape
-
-	# Left-side movement buttons: radius 60px
-	var left_shape = CircleShape2D.new()
-	left_shape.radius = 60
-	btn_left.shape = left_shape
-	btn_right.shape = left_shape
-
 	# Hide fury button until unlocked
 	btn_fury.visible = false
 	game_state.fury_unlocked_changed.connect(_on_fury_unlocked)

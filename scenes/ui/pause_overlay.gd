@@ -14,6 +14,7 @@ func _ready() -> void:
 
 	$Panel/MarginContainer/VBoxContainer/ResumeButton.pressed.connect(_on_resume)
 	$Panel/MarginContainer/VBoxContainer/OptionsButton.pressed.connect(_on_options)
+	$Panel/MarginContainer/VBoxContainer/RestartButton.pressed.connect(_on_restart)
 	$Panel/MarginContainer/VBoxContainer/MainMenuButton.pressed.connect(_on_main_menu)
 
 
@@ -25,6 +26,12 @@ func _on_resume() -> void:
 func _on_options() -> void:
 	if options_panel:
 		options_panel.show()
+
+
+func _on_restart() -> void:
+	hide()
+	resume_requested.emit()
+	game_manager.restart_level()
 
 
 func _on_main_menu() -> void:

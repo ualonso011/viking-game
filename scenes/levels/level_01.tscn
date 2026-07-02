@@ -1,24 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2x4t6qhoc7ou"]
+[gd_scene load_steps=8 format=3 uid="uid://d2x4t6qhoc7ou" base_scene=ExtResource("1_base")]
 
-[ext_resource type="Script" path="res://scenes/levels/level_01.gd" id="1_mbdey"]
-[ext_resource type="PackedScene" uid="uid://d4vsnrl0gnk0g" path="res://scenes/enemies/soldier.tscn" id="2_k7x6y"]
-[ext_resource type="PackedScene" uid="uid://dhgjt3jj1vm73" path="res://scenes/player/player.tscn" id="3_wc2hk"]
-[ext_resource type="Texture2D" path="res://assets/sprites/panel_wood.png" id="panel_wood"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/levels/level_01.gd" id="2_script"]
+[ext_resource type="PackedScene" uid="uid://d4vsnrl0gnk0g" path="res://scenes/enemies/soldier.tscn" id="3_soldier"]
+[ext_resource type="Texture2D" path="res://assets/sprites/panel_wood.png" id="4_panel_wood"]
 
-[sub_resource type="RectangleShape2D" id="1"]
+[sub_resource type="RectangleShape2D" id="1_ground"]
 size = Vector2(6400, 32)
 
-[sub_resource type="RectangleShape2D" id="2"]
+[sub_resource type="RectangleShape2D" id="2_platform"]
 size = Vector2(128, 32)
 
-[sub_resource type="RectangleShape2D" id="3"]
+[sub_resource type="RectangleShape2D" id="3_wall"]
 size = Vector2(32, 128)
 
-[sub_resource type="RectangleShape2D" id="4"]
+[sub_resource type="RectangleShape2D" id="4_trigger"]
 size = Vector2(128, 64)
 
 [node name="Level01" type="Node2D"]
-script = ExtResource("1_mbdey")
+script = ExtResource("2_script")
 
 [node name="CameraLimits" type="Node2D" parent="."]
 metadata/left = 0
@@ -44,67 +44,58 @@ offset_bottom = 1080
 position = Vector2(3200, 760)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-shape = SubResource("1")
+shape = SubResource("1_ground")
 
 [node name="GroundVisual" type="Sprite2D" parent="."]
 position = Vector2(3200.0, 760.0)
 scale = Vector2(100.0, 0.5)
-texture = ExtResource("panel_wood")
+texture = ExtResource("4_panel_wood")
 
 [node name="Platform1" type="StaticBody2D" parent="."]
 position = Vector2(1200, 600)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
-shape = SubResource("2")
+shape = SubResource("2_platform")
 
 [node name="Plat1Visual" type="Sprite2D" parent="."]
 position = Vector2(1200.0, 600.0)
 scale = Vector2(2.0, 0.5)
-texture = ExtResource("panel_wood")
+texture = ExtResource("4_panel_wood")
 
 [node name="Platform2" type="StaticBody2D" parent="."]
 position = Vector2(2400, 480)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
-shape = SubResource("2")
+shape = SubResource("2_platform")
 
 [node name="Plat2Visual" type="Sprite2D" parent="."]
 position = Vector2(2400.0, 480.0)
 scale = Vector2(2.0, 0.5)
-texture = ExtResource("panel_wood")
+texture = ExtResource("4_panel_wood")
 
 [node name="WallEnd" type="StaticBody2D" parent="."]
 position = Vector2(6384, 440)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallEnd"]
-shape = SubResource("3")
+shape = SubResource("3_wall")
 
 [node name="WallStart" type="StaticBody2D" parent="."]
 position = Vector2(16, 440)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallStart"]
-shape = SubResource("3")
+shape = SubResource("3_wall")
 
-[node name="Player" parent="." instance=ExtResource("3_wc2hk")]
-position = Vector2(100, 700)
-
-[node name="Soldier1" parent="." instance=ExtResource("2_k7x6y")]
+[node name="Soldier1" parent="." instance=ExtResource("3_soldier")]
 position = Vector2(2000, 700)
 
-[node name="Soldier2" parent="." instance=ExtResource("2_k7x6y")]
+[node name="Soldier2" parent="." instance=ExtResource("3_soldier")]
 position = Vector2(3500, 700)
 
 [node name="IntroTrigger" type="Area2D" parent="."]
 position = Vector2(1600, 720)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="IntroTrigger"]
-shape = SubResource("4")
-
-[node name="Checkpoint" type="Area2D" parent="."]
-position = Vector2(3200, 720)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
-shape = SubResource("2")
+shape = SubResource("4_trigger")
 
 [node name="CpVisual" type="ColorRect" parent="."]
 color = Color(1, 0.8, 0, 0.5)
@@ -112,12 +103,6 @@ offset_left = 3136
 offset_top = 700
 offset_right = 3264
 offset_bottom = 750
-
-[node name="EndTrigger" type="Area2D" parent="."]
-position = Vector2(6300, 720)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EndTrigger"]
-shape = SubResource("2")
 
 [node name="EndVisual" type="ColorRect" parent="."]
 color = Color(0, 0.6, 0, 0.3)

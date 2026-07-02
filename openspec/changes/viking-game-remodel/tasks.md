@@ -151,34 +151,34 @@ Branch: `feature/viking-remodel-cutscenes` (base: PR 3)
 
 ### Phase 4.1 — Cutscene Extensions
 
-- [ ] 4.1.1 Create `scenes/ui/portrait_panel.tscn`: TextureRect (128x128) + Label (speaker name)
-- [ ] 4.1.2 Add PortraitPanel + BackgroundLayer nodes to `cutscene_manager.tscn`
-- [ ] 4.1.3 Update `cutscene_manager.gd._show_line()`: read `portrait`/`background` keys via dict.get(); show/hide portrait_panel; cross-fade background
-- [ ] 4.1.4 Add `audio_manager.play_ambience()` call in cutscene start (per-cutscene ambience mapping)
+- [x] 4.1.1 Create `scenes/ui/portrait_panel.tscn`: TextureRect (128x128) + Label (speaker name)
+- [x] 4.1.2 Add PortraitPanel + BackgroundLayer nodes to `cutscene_manager.tscn`
+- [x] 4.1.3 Update `cutscene_manager.gd._show_line()`: read `portrait`/`background` keys via dict.get(); show/hide portrait_panel; cross-fade background
+- [x] 4.1.4 Add `audio_manager.play_ambience()` call in cutscene start (per-cutscene ambience mapping)
 
 ### Phase 4.2 — New Cutscene Dialogue
 
-- [ ] 4.2.1 Add `cinders_intro()` to `narrative_db.gd` (4 lines, portrait=einar, bg=cinders_village)
-- [ ] 4.2.2 Add `warpath_intro()` to `narrative_db.gd` (4 lines, bg=snowy_mountains)
-- [ ] 4.2.3 Add `england_intro()` to `narrative_db.gd` (3 lines, bg=english_coast, portrait=english_soldier)
+- [x] 4.2.1 Add `cinders_intro()` to `narrative_db.gd` (4 lines, portrait=einar, bg=cinders_village)
+- [x] 4.2.2 Add `warpath_intro()` to `narrative_db.gd` (4 lines, bg=snowy_mountains)
+- [x] 4.2.3 Add `england_intro()` to `narrative_db.gd` (3 lines, bg=english_coast, portrait=english_soldier)
 
 ### Phase 4.3 — LevelBase
 
-- [ ] 4.3.1 Create `scenes/levels/level_base.gd`: class_name LevelBase, extends Node2D; @onready player/checkpoint/end_trigger; @export level_name, next_level_path, checkpoint_unlocks_fury, checkpoint_upgrades_hp
-- [ ] 4.3.2 Implement `_ready()`: wire signals, set initial checkpoint, show level name on HUD
-- [ ] 4.3.3 Implement `_on_checkpoint_entered()`: update checkpoint, heal, show HUD banner, handle fury unlock / HP upgrade
-- [ ] 4.3.4 Implement `_on_end_trigger_entered()`: add damage bonus, load next level
-- [ ] 4.3.5 Create `scenes/levels/level_base.tscn`: Player, Checkpoint, EndTrigger template nodes
+- [x] 4.3.1 Create `scenes/levels/level_base.gd`: class_name LevelBase, extends Node2D; @onready player/checkpoint/end_trigger; @export level_name, next_level_path, checkpoint_unlocks_fury, checkpoint_upgrades_hp
+- [x] 4.3.2 Implement `_ready()`: wire signals, set initial checkpoint, show level name on HUD
+- [x] 4.3.3 Implement `_on_checkpoint_entered()`: update checkpoint, heal, show HUD banner, handle fury unlock / HP upgrade
+- [x] 4.3.4 Implement `_on_end_trigger_entered()`: add damage bonus, load next level
+- [x] 4.3.5 Create `scenes/levels/level_base.tscn`: Player, Checkpoint, EndTrigger template nodes
 
 ### Phase 4.4 — Level Refactoring (7 levels)
 
-- [ ] 4.4.1 Refactor `level_01.gd`: extends LevelBase; set level_name="Farm", next_level_path=L02, checkpoint_unlocks_fury=true; keep IntroTrigger override (~18 lines)
-- [ ] 4.4.2 Refactor `level_02.gd`: extends LevelBase; add StoryTrigger for exile_forest cutscene (~16 lines)
-- [ ] 4.4.3 Refactor `level_03.gd`: extends LevelBase; add StoryTrigger for **new** cinders_intro cutscene + ambience (~14 lines)
-- [ ] 4.4.4 Refactor `level_04.gd`: extends LevelBase; add StoryTrigger for **new** warpath_intro; checkpoint_upgrades_hp=true (~15 lines)
-- [ ] 4.4.5 Refactor `level_05.gd`: extends LevelBase; keep boss spawn + before_halvard trigger; checkpoint_upgrades_hp=true (~22 lines)
-- [ ] 4.4.6 Refactor `level_06.gd`: extends LevelBase; add StoryTrigger for **new** england_intro; checkpoint_upgrades_hp=true (~14 lines)
-- [ ] 4.4.7 Refactor `level_07.gd`: extends LevelBase; override end_trigger (require boss dead); final_boss_intro/defeat triggers; checkpoint_upgrades_hp=true (~26 lines)
-- [ ] 4.4.8 Update all 7 `level_*.tscn`: inherit from level_base.tscn where possible; keep per-level unique nodes (platforms, soldiers, boss, triggers)
+- [x] 4.4.1 Refactor `level_01.gd`: extends LevelBase; set level_name="Farm", next_level_path=L02, checkpoint_unlocks_fury=true; keep IntroTrigger override (~18 lines)
+- [x] 4.4.2 Refactor `level_02.gd`: extends LevelBase; add StoryTrigger for exile_forest cutscene (~16 lines)
+- [x] 4.4.3 Refactor `level_03.gd`: extends LevelBase; add StoryTrigger for **new** cinders_intro cutscene + ambience (~14 lines)
+- [x] 4.4.4 Refactor `level_04.gd`: extends LevelBase; add StoryTrigger for **new** warpath_intro; checkpoint_upgrades_hp=true (~15 lines)
+- [x] 4.4.5 Refactor `level_05.gd`: extends LevelBase; keep boss spawn + before_halvard trigger; checkpoint_upgrades_hp=true (~22 lines)
+- [x] 4.4.6 Refactor `level_06.gd`: extends LevelBase; add StoryTrigger for **new** england_intro; checkpoint_upgrades_hp=true (~14 lines)
+- [x] 4.4.7 Refactor `level_07.gd`: extends LevelBase; override end_trigger (require boss dead); final_boss_intro/defeat triggers; checkpoint_upgrades_hp=true (~26 lines)
+- [x] 4.4.8 Update all 7 `level_*.tscn`: inherit from level_base.tscn where possible; keep per-level unique nodes (platforms, soldiers, boss, triggers)
 
 **Verify**: L3/L4/L6 cutscenes play with portraits+backgrounds+ambience; all 7 levels complete in sequence; APK ~28 MB.

@@ -1,61 +1,87 @@
 extends Node
 ## Narrative database: dialogue lines for all cutscenes.
-## Each function returns an Array[Dictionary] with {speaker, text}.
+## Each function returns an Array[Dictionary] with {speaker, text, portrait?, background?}.
 
 ## Level 01 - Intro: Farm life, before the attack
 func intro_farm() -> Array[Dictionary]:
 	return [
-		{"speaker": "Narrator", "text": "Einar, a simple farmer of the northern fjords, returns from the hunt."},
-		{"speaker": "Einar", "text": "The air smells wrong... smoke from the village."},
-		{"speaker": "Narrator", "text": "He runs. The longhouse is burning. His family is gone."},
-		{"speaker": "Einar", "text": "No... NO! Who did this?!"},
-		{"speaker": "Narrator", "text": "A survivor whispers one name: Jarl Halvard. Allied with the English king."},
-		{"speaker": "Einar", "text": "Halvard... I will find you. I will burn your world to ash."},
-		{"speaker": "Narrator", "text": "And so the farmer died that day. From the ashes, a bear arose."},
+		{"speaker": "Narrador", "text": "Einar, un simple granjero de los fiordos del norte, regresa de la caza."},
+		{"speaker": "Einar", "text": "El aire huele mal... humo del pueblo."},
+		{"speaker": "Narrador", "text": "Corre. El salón arde. Su familia ha desaparecido."},
+		{"speaker": "Einar", "text": "No... ¡NO! ¿Quién hizo esto?"},
+		{"speaker": "Narrador", "text": "Un superviviente susurra un nombre: el Jarl Halvard. Aliado del rey inglés."},
+		{"speaker": "Einar", "text": "Halvard... te encontraré. Reduciré tu mundo a cenizas."},
+		{"speaker": "Narrador", "text": "Así murió el granjero aquel día. De las cenizas surgió un oso."},
 	]
 
 ## Level 02 - Exile: The burned forest
 func exile_forest() -> Array[Dictionary]:
 	return [
-		{"speaker": "Narrator", "text": "Einar follows the trail of destruction eastward."},
-		{"speaker": "Einar", "text": "Halvard's men... they went through these woods."},
-		{"speaker": "Narrator", "text": "The forest is scarred. The ashes of the dead cling to everything."},
-		{"speaker": "Einar", "text": "They took my wife. My children. For what? Silver?"},
-		{"speaker": "Narrator", "text": "There is no answer. Only the path ahead."},
+		{"speaker": "Narrador", "text": "Einar sigue el rastro de destrucción hacia el este."},
+		{"speaker": "Einar", "text": "Los hombres de Halvard... cruzaron estos bosques."},
+		{"speaker": "Narrador", "text": "El bosque está herido. Las cenizas de los muertos se adhieren a todo."},
+		{"speaker": "Einar", "text": "Se llevaron a mi mujer. A mis hijos. ¿Por qué? ¿Por plata?"},
+		{"speaker": "Narrador", "text": "No hay respuesta. Solo el camino adelante."},
+	]
+
+## Level 03 - Cinders: Entering the ruined village
+func cinders_intro() -> Array[Dictionary]:
+	return [
+		{"speaker": "Narrador", "text": "Lo que fue granja es ahora ceniza.", "background": "cinders_village"},
+		{"speaker": "Einar", "text": "Restos de hogares. Los de Halvard pasaron por aquí como langostas.", "portrait": "einar"},
+		{"speaker": "Narrador", "text": "Cada paso que da, el oso que lleva dentro crece un poco más."},
+		{"speaker": "Einar", "text": "El odio es combustible. No me quedará nada cuando esto termine."},
+	]
+
+## Level 04 - Warpath: Snowy mountains
+func warpath_intro() -> Array[Dictionary]:
+	return [
+		{"speaker": "Narrador", "text": "Las montañas de nieve reciben a Einar con un silencio blanco.", "background": "snowy_mountains"},
+		{"speaker": "Einar", "text": "El frío me recuerda a casa. Antes del fuego.", "portrait": "einar"},
+		{"speaker": "Narrador", "text": "Una fortaleza se asoma entre la niebla. La morada del Jarl."},
+		{"speaker": "Einar", "text": "Halvard. Por fin.", "portrait": "einar"},
 	]
 
 ## Level 05 - Pre-Boss: Facing Halvard
 func before_halvard() -> Array[Dictionary]:
 	return [
-		{"speaker": "Narrator", "text": "Einar reaches the Jarl's hall. The doors are open, as if expecting him."},
-		{"speaker": "Einar", "text": "Halvard! Show yourself, coward!"},
-		{"speaker": "Jarl Halvard", "text": "The farmer who became a bear. I've heard of you."},
-		{"speaker": "Jarl Halvard", "text": "Your family? Your wife was... useful. The boy has spirit."},
-		{"speaker": "Einar", "text": "WHERE ARE THEY?!"},
-		{"speaker": "Jarl Halvard", "text": "The boy went south. To England. The king likes young warriors."},
-		{"speaker": "Einar", "text": "If he is hurt... I will make you suffer before you die."},
-		{"speaker": "Narrator", "text": "The Jarl laughs. Steel meets steel. One of them will not leave this hall."},
+		{"speaker": "Narrador", "text": "Einar llega al salón del Jarl. Las puertas están abiertas, como si lo esperaran."},
+		{"speaker": "Einar", "text": "¡Halvard! ¡Muéstrate, cobarde!"},
+		{"speaker": "Jarl Halvard", "text": "El granjero que se convirtió en oso. He oído hablar de ti."},
+		{"speaker": "Jarl Halvard", "text": "¿Tu familia? Tu mujer fue... útil. El niño tiene temple."},
+		{"speaker": "Einar", "text": "¡¿DÓNDE ESTÁN?!"},
+		{"speaker": "Jarl Halvard", "text": "El niño fue al sur. A Inglaterra. Al rey le gustan los jóvenes guerreros."},
+		{"speaker": "Einar", "text": "Si está herido... te haré sufrir antes de morir."},
+		{"speaker": "Narrador", "text": "El Jarl ríe. El acero choca contra el acero. Uno de ellos no saldrá de este salón."},
+	]
+
+## Level 06 - England: Arriving on hostile shores
+func england_intro() -> Array[Dictionary]:
+	return [
+		{"speaker": "Narrador", "text": "Inglaterra. La tierra que Halvard sirve.", "background": "english_coast"},
+		{"speaker": "Einar", "text": "Si mi hijo está aquí, lo encontraré. Aunque tenga que cruzar este reino entero.", "portrait": "einar"},
+		{"speaker": "Soldado inglés", "text": "¡Ahí! ¡Un vikingo! ¡A las armas!", "portrait": "english_soldier"},
 	]
 
 ## Level 07 - Final Boss: The tragic reveal
 func final_boss_intro() -> Array[Dictionary]:
 	return [
-		{"speaker": "Narrator", "text": "Einar crosses the ash-covered battlefield. In the distance, a figure waits."},
-		{"speaker": "Narrator", "text": "The English king's champion. A young warrior in black armor."},
-		{"speaker": "Young Warrior", "text": "You must be the one they call the Ash Bear."},
-		{"speaker": "Einar", "text": "Stand aside, boy. I have no quarrel with you."},
-		{"speaker": "Young Warrior", "text": "I have been told to kill you. I have no choice."},
-		{"speaker": "Narrator", "text": "They fight. Steel on steel. Father against son, neither knowing."},
+		{"speaker": "Narrador", "text": "Einar atraviesa el campo de batalla cubierto de cenizas. A lo lejos, una figura espera."},
+		{"speaker": "Narrador", "text": "El campeón del rey inglés. Un joven guerrero con armadura negra."},
+		{"speaker": "Joven guerrero", "text": "Debes ser a quien llaman el Oso de Ceniza."},
+		{"speaker": "Einar", "text": "Apártate, muchacho. No tengo contigo."},
+		{"speaker": "Joven guerrero", "text": "Me ordenaron matarte. No tengo elección."},
+		{"speaker": "Narrador", "text": "Luchan. Acero contra acero. Padre contra hijo, sin saberlo."},
 	]
 
 func final_boss_defeat() -> Array[Dictionary]:
 	return [
-		{"speaker": "Narrator", "text": "The young warrior falls. Einar kneels beside him."},
-		{"speaker": "Young Warrior", "text": "Father...?"},
-		{"speaker": "Einar", "text": "No. No, no, no... it cannot be..."},
-		{"speaker": "Narrator", "text": "Under the black armor, the face of a boy. His son."},
-		{"speaker": "Einar", "text": "My son... my boy... what have I done?"},
-		{"speaker": "Narrator", "text": "The Ash Bear holds his son as the ashes fall around them."},
-		{"speaker": "Narrator", "text": "There is no victory. There is no justice. Only ashes."},
-		{"speaker": "Narrator", "text": "The fire that forged the bear consumed everything he loved."},
+		{"speaker": "Narrador", "text": "El joven guerrero cae. Einar se arrodilla a su lado."},
+		{"speaker": "Joven guerrero", "text": "¿Padre...?"},
+		{"speaker": "Einar", "text": "No. No, no, no... no puede ser..."},
+		{"speaker": "Narrador", "text": "Bajo la armadura negra, el rostro de un niño. Su hijo."},
+		{"speaker": "Einar", "text": "Mi hijo... mi niño... ¿qué he hecho?"},
+		{"speaker": "Narrador", "text": "El Oso de Ceniza sostiene a su hijo mientras las cenizas caen a su alrededor."},
+		{"speaker": "Narrador", "text": "No hay victoria. No hay justicia. Solo cenizas."},
+		{"speaker": "Narrador", "text": "El fuego que forjó al oso consumió todo lo que amaba."},
 	]

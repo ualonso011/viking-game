@@ -3,7 +3,7 @@ extends CanvasLayer
 
 const ATTRIBUTION_PATH := "res://assets/audio/ATTRIBUTION.md"
 
-@onready var text_label: RichTextLabel = $Panel/MarginContainer/ScrollContainer/RichTextLabel
+@onready var text_label: RichTextLabel = $Panel/MarginContainer/VBoxContainer/ScrollContainer/RichTextLabel
 
 
 func _ready() -> void:
@@ -12,7 +12,7 @@ func _ready() -> void:
 	visible = false
 
 	_load_attribution()
-	$Panel/MarginContainer/BackButton.pressed.connect(hide)
+	$Panel/MarginContainer/VBoxContainer/BackButton.pressed.connect(hide)
 
 
 func _load_attribution() -> void:

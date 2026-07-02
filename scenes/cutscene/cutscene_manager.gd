@@ -17,6 +17,7 @@ var input_blocked: bool = false
 
 
 func _ready() -> void:
+	theme = preload("res://assets/themes/viking_theme.tres")
 	text_panel.visible = false
 	continue_hint.visible = false
 	process_mode = PROCESS_MODE_WHEN_PAUSED

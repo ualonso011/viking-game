@@ -15,6 +15,7 @@ var _displayed_hp: float = 0.0
 
 
 func _ready() -> void:
+	theme = preload("res://assets/themes/viking_theme.tres")
 	_displayed_hp = game_state.current_hp
 	level_name.modulate.a = 0.0
 	checkpoint_banner.modulate.a = 0.0
